@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginData } from 'src/app/models/form_model/loginForm.model';
+import { ErrorMessage } from 'src/app/models/message.model';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -14,8 +15,12 @@ export class LoginComponent implements OnInit {
     password: ''
   };
 
-  passwordShown:boolean=false;
-
+  _errors: ErrorMessage={
+    "message":"",
+    "errors":{}
+  };
+  _passwordShow:boolean = false;
+  _isLoading:boolean = false;
   constructor(
     private authService:AuthService,
     private router:Router
@@ -26,17 +31,24 @@ export class LoginComponent implements OnInit {
 
   onLogin(){
     this.authService.login(this._data)
-    .subscribe(
-      ()=>{
-        this.router.navigate(['/app']);
-      }
-    )
+    .subscribe({
+        next:()=>{
+          this.router.navigate(['/app']);
+        },
+        error:(error)=>{
+          this._errors=error.error;
+        }
+      })
   }
   onReset(){
     this._data = {
       name: '',
       password: ''
     }
+  }
+
+  isFormValid(){
+    return this._data.name.length > 0 && this._data.password.length > 0
   }
 
 }

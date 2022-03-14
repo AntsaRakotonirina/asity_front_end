@@ -1,16 +1,53 @@
-<form>
-    <table>
-        <tr>
-            <td><input type="text" placeholder="UserName" [(ngModel)]="_data.name" [ngModelOptions]="{standalone: true}"></td>
-        </tr>
-        <tr>
-            <td><input type="password" placeholder="Password" [(ngModel)]="_data.password" [ngModelOptions]="{standalone: true}"></td>
-        </tr>
-        <tr>
-            <td>
-                <button (click)="onLogin()">Log in</button>
-                <button (click)="onReset()">Cancel</button>
-            </td>
-        </tr>
-    </table>
-</form>
+<div class="hero">
+    <div class="tag">
+        Bienvenue sur Asity DB
+    </div>
+    <div class="baseline">
+        La base de donée sur les recensements animalier d'asity
+    </div>
+</div>
+<div class="form">
+    <h3>Connectez vous</h3>
+    <div class="form-section">
+        <label for="name">Nom d'utilisateur</label>
+        <span class=" p-input-icon-left p-input-icon-right">
+            <input type="text" 
+            pInputText id="name" 
+            [(ngModel)]="_data.name"
+            [class]="_errors.errors.user? 'ng-invalid ng-dirty':''"
+            />
+            <i class="pi pi-user"></i>
+            <i></i>
+        </span>
+        <small class="p-error" style="display: block;" *ngIf="_errors.errors.user">Aucun utilisateur ne correspond</small>
+    </div>
+    <div class="form-section">
+        <label for="password">Mot de passe</label>
+        <span class=" p-input-icon-left p-input-icon-right">
+            <input [type]="_passwordShow ? 'text':'password'" 
+            pInputText id="password" 
+            [(ngModel)]="_data.password"
+            [class]="_errors.errors.password? 'ng-invalid ng-dirty':''"
+            />
+            <i class="pi pi-key"></i>
+            <i class="pi pi-eye" (click)="_passwordShow = true" *ngIf="!_passwordShow"></i>
+            <i class="pi pi-eye-slash" (click)="_passwordShow = false" *ngIf="_passwordShow"></i>
+        </span>
+        <small class="p-error" style="display: block;" *ngIf="_errors.errors.password">Mot de passe incorrecte</small>
+    </div>
+    <div class="form-controll">
+        <p-button 
+        styleClass="p-button-raised my-button"
+        [loading]="_isLoading"
+        (onClick)="onLogin()"
+        label="Se connecter"
+        [disabled]="!isFormValid()"
+        ></p-button>
+        <p-button 
+        styleClass="p-button-text my-button"
+        [loading]="_isLoading"
+        (onClick)="onReset()"
+        label="Annuler"
+        ></p-button>
+    </div>
+</div>
