@@ -1,0 +1,16 @@
+<form>
+    <table>
+        <tr>
+            <td><input type="text" placeholder="UserName" [(ngModel)]="_data.name" [ngModelOptions]="{standalone: true}"></td>
+        </tr>
+        <tr>
+            <td><input type="password" placeholder="Password" [(ngModel)]="_data.password" [ngModelOptions]="{standalone: true}"></td>
+        </tr>
+        <tr>
+            <td>
+                <button (click)="onLogin()">Log in</button>
+                <button (click)="onReset()">Cancel</button>
+            </td>
+        </tr>
+    </table>
+</form>
