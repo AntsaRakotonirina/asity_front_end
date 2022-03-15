@@ -1,6 +1,6 @@
 import { EntityContainer } from "./entityContainer.model";
 
-export interface AnimalAttributes{
+export interface SingleAnimalAttributes{
     'categorie' : string,
     'endemicite' : string,
     'espece'  : string,
@@ -12,6 +12,15 @@ export interface AnimalAttributes{
     'nom_communs' : EntityContainer<NomCommun>[],
     'nom_scientifiques' : EntityContainer<NomScientifique>[],
     'notes': EntityContainer<Note>[]
+}
+
+export interface AnimalAttributes{
+    'categorie' : string,
+    'espece'  : string,
+    'famille' : string,
+    'genre' : string,
+    'status' : string
+    'nom_courrant':string
 }
 
 export interface NomVernaculaire{

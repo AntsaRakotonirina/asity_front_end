@@ -9,11 +9,25 @@ import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './views/login/login.component';
 import { MainComponent } from './views/main/main.component';
 import { httpInterceptorProviders } from './interceptors';
+import { AnimalComponent } from './views/animal/animal.component';
+import { SuiviComponent } from './views/suivi/suivi.component';
+import { ScientifiqueComponent } from './views/scientifique/scientifique.component';
+import { CardsComponent } from './widgets/cards/cards.component';
 
 import { InputTextModule } from "primeng/inputtext";
 import { PasswordModule } from "primeng/password";
 import { ButtonModule } from "primeng/button";
 import { CheckboxModule } from "primeng/checkbox";
+import { DividerModule } from "primeng/divider";
+import { ConfirmDialogModule } from "primeng/confirmdialog";
+import { ConfirmationService } from "primeng/api";
+import { DropdownModule } from "primeng/dropdown";
+import { CardModule } from "primeng/card";
+import { ScrollPanelModule } from "primeng/scrollpanel";
+import { SkeletonModule } from "primeng/skeleton";
+import { MenuModule } from "primeng/menu";
+import { ContextMenuModule } from "primeng/contextmenu";
+
 
 //Angular Native modules
 const commonModules = [
@@ -21,7 +35,7 @@ const commonModules = [
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
 ]
 
 //Prime NG's modules
@@ -29,21 +43,34 @@ const  primesModules = [
   InputTextModule,
   PasswordModule,
   ButtonModule,
-  CheckboxModule
+  CheckboxModule,
+  DividerModule,
+  ConfirmDialogModule,
+  DropdownModule,
+  CardModule,
+  ScrollPanelModule,
+  SkeletonModule,
+  MenuModule,
+  ContextMenuModule
 ]
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    MainComponent
+    MainComponent,
+    AnimalComponent,
+    SuiviComponent,
+    ScientifiqueComponent,
+    CardsComponent
   ],
   imports: [
     ...commonModules,
     ...primesModules
   ],
   providers: [
-    httpInterceptorProviders
+    httpInterceptorProviders,
+    ConfirmationService
   ],
   bootstrap: [AppComponent]
 })

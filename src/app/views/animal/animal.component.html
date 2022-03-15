@@ -1,0 +1,86 @@
+<div class="search-form">
+    <i class="pi pi-search"></i>
+    <form (submit)="onSearch()">
+        <input type="text" placeholder="Recherche..." [(ngModel)]="_search" [ngModelOptions]="{standalone: true}" required>
+    </form>
+    <p-dropdown 
+    [options]="attributes" 
+    optionLabel="nom" 
+    [(ngModel)]="_selectedAttribute" 
+    placeholder="Selection un filtre"
+    [ngModelOptions]="{standalone: true}"></p-dropdown>
+</div>
+
+<div class="list" >
+    <div class="grid" style="padding: 1rem;" *ngIf="animals">
+        <div class="col-12 md:col-6 lg:col-3" *ngFor="let animal of animals.data">
+            <app-cards [id]="animal.id" 
+            (delete)="onDelete(animal)"
+            (update)="onUpdate(animal)">
+                <div content>
+                    {{animal.attributes.nom_courrant}}
+                </div>
+                <div subtext>
+                    {{animal.attributes.categorie}}
+                </div>
+            </app-cards>
+        </div>
+    </div>
+    <div class="grid" style="padding: 1rem;" *ngIf="!animals">
+        <div class="col-12 md:col-6 lg:col-3">
+            <p-skeleton width="250px" height="126px"></p-skeleton>
+        </div>
+        <div class="col-12 md:col-6 lg:col-3">
+            <p-skeleton width="250px" height="126px"></p-skeleton>
+        </div>
+        <div class="col-12 md:col-6 lg:col-3">
+            <p-skeleton width="250px" height="126px"></p-skeleton>
+        </div>
+        <div class="col-12 md:col-6 lg:col-3">
+            <p-skeleton width="250px" height="126px"></p-skeleton>
+        </div>
+        <div class="col-12 md:col-6 lg:col-3">
+            <p-skeleton width="250px" height="126px"></p-skeleton>
+        </div>
+        <div class="col-12 md:col-6 lg:col-3">
+            <p-skeleton width="250px" height="126px"></p-skeleton>
+        </div>
+        <div class="col-12 md:col-6 lg:col-3">
+            <p-skeleton width="250px" height="126px"></p-skeleton>
+        </div>
+        <div class="col-12 md:col-6 lg:col-3">
+            <p-skeleton width="250px" height="126px"></p-skeleton>
+        </div>
+        <div class="col-12 md:col-6 lg:col-3">
+            <p-skeleton width="250px" height="126px"></p-skeleton>
+        </div>
+        <div class="col-12 md:col-6 lg:col-3">
+            <p-skeleton width="250px" height="126px"></p-skeleton>
+        </div>
+        <div class="col-12 md:col-6 lg:col-3">
+            <p-skeleton width="250px" height="126px"></p-skeleton>
+        </div>
+        <div class="col-12 md:col-6 lg:col-3">
+            <p-skeleton width="250px" height="126px"></p-skeleton>
+        </div>
+        <div class="col-12 md:col-6 lg:col-3">
+            <p-skeleton width="250px" height="126px"></p-skeleton>
+        </div>
+        <div class="col-12 md:col-6 lg:col-3">
+            <p-skeleton width="250px" height="126px"></p-skeleton>
+        </div>
+        <div class="col-12 md:col-6 lg:col-3">
+            <p-skeleton width="250px" height="126px"></p-skeleton>
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+    <div class="flex justify-content-center" *ngIf="animals">
+        <div *ngFor="let link of animals.meta.links" style="margin: 0 .5rem;">
+            <button  pButton class="p-button" [class]="link.active?'p-button-outlined':'p-button-text'" [disabled]="!link.url" (click)="onPage(link.url)">
+                {{link.label}}
+            </button>
+        </div>
+    </div>
+</div>

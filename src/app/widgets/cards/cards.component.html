@@ -1,0 +1,19 @@
+<div class="header">
+    <div class="header-content">
+        <ng-content select="[header]"></ng-content>
+    </div>
+    <p-menu [popup]="true" #menu [model]="_menuItems"></p-menu>
+    <button class="p-button p-button-text" (click)="menu.toggle($event)">
+        <i class="pi pi-ellipsis-v"></i>
+    </button>
+</div>
+
+<div class="content">
+    <ng-content select="[content]"></ng-content>
+</div>
+<div class="subText">
+    <ng-content select="[subtext]"></ng-content>
+</div>
+<div class="footer">
+    <ng-content select="[footer]"></ng-content>
+</div>

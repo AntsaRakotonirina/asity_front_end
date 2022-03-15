@@ -2,7 +2,8 @@ const baseUrl = 'http://localhost:8000/api/v1'
 const URLS = {
     base:baseUrl,
     login:baseUrl+'/login',
-    logout:baseUrl+'/logout'
+    logout:baseUrl+'/logout',
+    animal:baseUrl+'/animaux'
 }
 export const myEnv = {
     urls:URLS,

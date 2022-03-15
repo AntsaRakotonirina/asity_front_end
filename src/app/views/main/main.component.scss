@@ -4,6 +4,33 @@
     width: 100%;
     display: flex;
 }
+.dock{
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    nav{
+        a{
+            display: block;
+            text-decoration: none;
+            padding: 1rem .5rem;
+            color: #000;
+            opacity: .5;
+            transition:.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+            &.active{
+                color: #40c019;
+                opacity: 1;
+                border-radius: 5px;
+                padding-left: 1rem;
+                border: solid #40c019 1px;
+            }
+            &:hover{
+                opacity: 1;
+            }
+        }
+    }
+}
 .content{
     flex: 1;
+    height: 100%;
 }

@@ -1,7 +1,19 @@
-<button (click)="onLogout()">Logout</button>
 <div class="dock">
-    
+    <div class="brand">
+        Asity DB
+    </div>
+    <nav>
+        <a [routerLink]="[ '/app/animal' ]" routerLinkActive="active">Animal</a>
+        <a [routerLink]="[ '/app/suivi' ]" routerLinkActive="active">Suivi</a>
+        <a [routerLink]="[ '/app/scientifique' ]" routerLinkActive="active">Scientifique</a>
+    </nav>
+    <button class=" p-button-outlined" pButton icon="pi pi-sign-out" label="Se deconnecter" (click)="onLogout()"></button>
 </div>
+<p-divider layout="vertical"></p-divider>
 <div class="content">
     <router-outlet></router-outlet>
 </div>
+<p-confirmDialog
+        rejectLabel="Annuler"
+        rejectButtonStyleClass="p-button-text"
+        acceptButtonStyleClass="p-button-outlined"></p-confirmDialog>

@@ -13,9 +13,9 @@ export interface PaginatedData<T>{
         "next": string|null
     },
     "meta": {
-        "current_page": string|null,
-        "from": string|null,
-        "last_page": string|null,
+        "current_page": number|null,
+        "from": number|null,
+        "last_page": number,
         "links": 
             {
                 "url": string|null,
@@ -23,8 +23,8 @@ export interface PaginatedData<T>{
                 "active": boolean
             }[],
         "path": string|null,
-        "per_page": number|null,
+        "per_page": number,
         "to": string|null,
-        "total": string|null
+        "total": number
     }
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ConfirmationService } from 'primeng/api';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -11,13 +12,14 @@ export class MainComponent implements OnInit {
 
   constructor(
     private authService:AuthService,
-    private router:Router
+    private router:Router,
+    private confirmationService:ConfirmationService
   ) { }
 
   ngOnInit(): void {
   }
 
-  onLogout(){
+  logout(){
     this.authService.logout()
     .subscribe(
       ()=>{
@@ -25,4 +27,17 @@ export class MainComponent implements OnInit {
       }
     );
   }
+  
+  onLogout(){
+    this.confirmationService.confirm({
+      header:"Deconnexion",
+      message: "Etes vous sur de vouloir vous deconnectez ?",
+      acceptLabel: "Deconnection",
+      icon:"pi pi-exclamation-triangle",
+      accept:()=>{
+        this.logout();
+      }
+    })
+  }
+
 }
