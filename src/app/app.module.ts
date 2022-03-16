@@ -22,12 +22,13 @@ import { CheckboxModule } from "primeng/checkbox";
 import { CardModule } from "primeng/card";
 import { ContextMenuModule } from "primeng/contextmenu";
 import { ConfirmDialogModule } from "primeng/confirmdialog";
-import { ConfirmationService } from "primeng/api";
+import { ConfirmationService, MessageService } from "primeng/api";
 import { ButtonModule } from "primeng/button";
 import { DividerModule } from "primeng/divider";
 import { DropdownModule } from "primeng/dropdown";
 import { DialogService, DynamicDialogModule, DynamicDialogRef } from "primeng/dynamicdialog";
 import { InputTextModule } from "primeng/inputtext";
+import { InputMaskModule } from "primeng/inputmask";
 import { MenuModule } from "primeng/menu";
 import { PasswordModule } from "primeng/password";
 import { PaginatorModule } from "primeng/paginator";
@@ -35,6 +36,9 @@ import { SpeedDialModule } from "primeng/speeddial";
 import { SelectButtonModule } from "primeng/selectbutton";
 import { ScrollPanelModule } from "primeng/scrollpanel";
 import { SkeletonModule } from "primeng/skeleton";
+import { ToastModule } from "primeng/toast";
+import { CreateScientifiqueFormComponent } from './forms/scientifique/create-scientifique-form/create-scientifique-form.component';
+import { UpdateScientifiqueFormComponent } from './forms/scientifique/update-scientifique-form/update-scientifique-form.component';
 
 //Angular Native modules
 const commonModules = [
@@ -63,7 +67,9 @@ const  primesModules = [
   AutoCompleteModule,
   SelectButtonModule,
   DynamicDialogModule,
-  PaginatorModule
+  PaginatorModule,
+  InputMaskModule,
+  ToastModule
 ]
 
 @NgModule({
@@ -76,7 +82,9 @@ const  primesModules = [
     ScientifiqueComponent,
     CardsComponent,
     TestFormComponent,
-    CreateAnimalFormComponent
+    CreateAnimalFormComponent,
+    CreateScientifiqueFormComponent,
+    UpdateScientifiqueFormComponent
   ],
   imports: [
     ...commonModules,
@@ -86,7 +94,8 @@ const  primesModules = [
     httpInterceptorProviders,
     ConfirmationService,
     DialogService,
-    DynamicDialogRef
+    DynamicDialogRef,
+    MessageService
   ],
   bootstrap: [AppComponent]
 })

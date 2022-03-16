@@ -15,8 +15,7 @@
     <div class="grid" style="padding: 1rem;" *ngIf="animals">
         <div class="col-12 md:col-6 lg:col-3" *ngFor="let animal of animals.data">
             <app-cards [id]="animal.id" 
-            (delete)="onDelete(animal)"
-            (update)="onUpdate(animal)">
+            (delete)="onDelete(animal)">
                 <div header>
                     <p-checkbox name="selected" [value]="animal.id" [(ngModel)]="_selectedIds"></p-checkbox>
                 </div>

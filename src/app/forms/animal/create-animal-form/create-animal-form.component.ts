@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MessageService } from 'primeng/api';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { animalFormsAttributes } from 'src/app/models/animal.model';
 import { SearchRequest } from 'src/app/models/requests/searchRequest.model';
@@ -31,7 +32,11 @@ export class CreateAnimalFormComponent implements OnInit {
   ]
   suggestions:string[]=[];
 
-  constructor(private animalService:AnimalService,private ref:DynamicDialogRef) { }
+  constructor(
+    private animalService:AnimalService,
+    private ref:DynamicDialogRef,
+    private messageService:MessageService
+  ) { }
   
   ngOnInit(): void {
   }
@@ -42,6 +47,11 @@ export class CreateAnimalFormComponent implements OnInit {
     this.values.genre.length > 0
   }
 
+  /**
+   * Autocompletion des champs saisis
+   * @param event 
+   * @param attribute 
+   */
   onSearch(event:{onriginalEvent:InputEvent,query:string},attribute:string){
     const request:SearchRequest = {attribute:attribute,search:event.query}
     this.animalService.autoComplete(request)
@@ -59,8 +69,11 @@ export class CreateAnimalFormComponent implements OnInit {
   onSubmit(){
     this.animalService.store(this.values)
     .subscribe({
-      next:()=>{this.ref.close()},
-      error:(error)=>{ console.error(error);}
+      next:()=>{
+        this.ref.close()
+        this.messageService.add({severity:'success',summary:"Animal Ajouter !",detail:'L\'animal a bien ete ajouter'})
+      },
+      error:(error)=>{}
     });
   }
 

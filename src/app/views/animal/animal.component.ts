@@ -1,19 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { ConfirmationService, MenuItem } from 'primeng/api';
+import { ConfirmationService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { CreateAnimalFormComponent } from 'src/app/forms/animal/create-animal-form/create-animal-form.component';
 import { AnimalAttributes } from 'src/app/models/animal.model';
-import { EntityContainer, PaginatedData } from 'src/app/models/entityContainer.model';
+import { EntityContainer } from 'src/app/models/entityContainer.model';
 import { SearchRequest } from 'src/app/models/requests/searchRequest.model';
 import { AnimalService } from 'src/app/services/animal.service';
-import { myEnv } from 'src/environments/myEnv';
+import { AbstractComponent } from '../abstractView.component';
 
 @Component({
   selector: 'app-animal',
   templateUrl: './animal.component.html',
   styleUrls: ['./animal.component.css']
 })
-export class AnimalComponent implements OnInit {
+export class AnimalComponent extends AbstractComponent<AnimalAttributes> implements OnInit {
 
   attributes:Attributes[]=[
     {nom:'nom'},
@@ -26,20 +26,27 @@ export class AnimalComponent implements OnInit {
     {nom:'status'}
   ];
 
-  _selectedIds:number[]=[];
-
   _selectedAttribute:Attributes={
     nom:'nom'
   }
-  _search:string="";
 
-  _dialItems:MenuItem[]=[];
+  protected override _searchAttribute:string = this._selectedAttribute.nom;
 
   constructor(
-    private animalService:AnimalService,
-    private confirmationService:ConfirmationService,
+    protected animalService:AnimalService,
+    protected override confirmationService:ConfirmationService,
     private dialogService:DialogService
-  ) { }
+  ) {
+    super(animalService,confirmationService);
+  }
+
+  override search(){
+    const search:SearchRequest = {
+      attribute:this._selectedAttribute.nom,
+      search:this._search
+    }
+    this.baseService.index(search).subscribe();
+  }
 
   ngOnInit(): void {
     this.search();
@@ -75,39 +82,9 @@ export class AnimalComponent implements OnInit {
     return this.animalService.animals;
   }
 
-  search(){
-    const search:SearchRequest = {
-      attribute:this._selectedAttribute.nom,
-      search:this._search
-    }
-    this.animalService.index(search).subscribe();
-  }
-
-  onPage(event:any){
-    const url = myEnv.urls.animal+'?page='+(event.page+1)+"&";
-    const search:SearchRequest = {
-      attribute:this._selectedAttribute.nom,
-      search:this._search
-    }
-    this.animalService.index(search,url).subscribe();
-  }
-
-  onDelete(animal:EntityContainer<AnimalAttributes>){
-    this.confirmationService.confirm({
-      header:"Suppresion",
-      message: "Etes vous sur de vouloir retirer le "+animal.attributes.nom_courrant+" ?",
-      acceptLabel: "Supprimer",
-      icon:"pi pi-exclamation-triangle",
-      accept:()=>{
-        this.animalService.delete(animal.id).subscribe();
-      }
-    })
-  }
-
-  onUpdate(animal:EntityContainer<AnimalAttributes>){}
-
-  onSearch(){
-    this.search()
+  override onDelete(animal:EntityContainer<AnimalAttributes>){
+    this._deleteMessage = "Etes vous sur de vouloir retirer le "+animal.attributes.nom_courrant+" ?";
+    super.onDelete(animal);
   }
 
 }

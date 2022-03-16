@@ -4,6 +4,7 @@ const URLS = {
     login:baseUrl+'/login',
     logout:baseUrl+'/logout',
     animal:baseUrl+'/animaux',
+    scientifique:baseUrl+'/scientifiques',
     autocomplete:baseUrl+'/autocomplete'
 }
 export const myEnv = {

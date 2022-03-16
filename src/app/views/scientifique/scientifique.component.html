@@ -1,1 +1,52 @@
-<p>scientifique works!</p>
+<div class="search-form">
+    <i class="pi pi-search"></i>
+    <form (submit)="onSearch()">
+        <input type="text" placeholder="Recherche..." [(ngModel)]="_search" [ngModelOptions]="{standalone: true}" required>
+    </form>
+</div>
+
+<div class="list" >
+    <div *ngIf="scientifiques">
+        <div class="list-item"  *ngFor="let scientifique of scientifiques.data">
+            <div class="grid">
+                <div class="col-fixed">
+                    <p-checkbox name="selected" [value]="scientifique.id" [(ngModel)]="_selectedIds"></p-checkbox>
+                </div>
+                <div class="col-fixed">
+                    <div class="name">
+                        {{scientifique.attributes.nom }}
+                        {{scientifique.attributes.prenom }}
+                    </div>
+                    <div class="spec">
+                        {{scientifique.attributes.specialite || "unknown" }}
+                    </div>
+                </div>
+                <div class="col flex flex-column align-items-end">
+                    <div class="email">
+                        {{scientifique.attributes.email }}
+                    </div>
+                    <div class="phone">
+                        {{scientifique.attributes.telephone }}
+                    </div>
+                </div>
+                <div class="col-fixed">
+                    <button class="p-button p-button-text p-button-secondary" (click)="onUpdate(scientifique)" >
+                        <i class="pi pi-pencil"></i>
+                    </button>
+                    <button class="p-button p-button-text p-button-danger" (click)="onDelete(scientifique)">
+                        <i class="pi pi-trash"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+<div class="footer">
+    <div class="dial">
+        <p-speedDial [model]="_dialItems" type="quarter-circle" direction="up-left" [radius]="130"></p-speedDial>
+    </div>
+    <p-paginator *ngIf="scientifiques" [rows]="15" [totalRecords]="scientifiques.meta.total" (onPageChange)="onPage($event)"></p-paginator>
+</div>
+

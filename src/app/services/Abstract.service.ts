@@ -1,0 +1,63 @@
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { MessageService } from 'primeng/api';
+import { tap } from 'rxjs';
+import { myEnv } from 'src/environments/myEnv';
+import { EntityContainer, PaginatedData } from '../models/entityContainer.model';
+import { SearchRequest } from '../models/requests/searchRequest.model';
+
+export abstract class AbstractService<T> {
+
+  protected _data!:PaginatedData<EntityContainer<T>>
+  protected defaultAttribute:string='';
+  public url:string = myEnv.urls.base;
+
+  constructor(protected http:HttpClient,protected messageService:MessageService) {}
+
+  public index(request:SearchRequest={attribute:this.defaultAttribute,search:''},url:string=this.url+'?'){
+    return this.http.get<PaginatedData<EntityContainer<T>>>(
+      url+'attribute='+request.attribute+"&search="+request.search
+    )
+    .pipe(
+      tap({
+        next:(response)=>{
+          this._data = response;
+        }
+      })
+    );
+  }
+
+  public store(request:any){
+    return this.http.post<EntityContainer<T>>(this.url,request)
+    .pipe(tap({
+      next:()=>{
+        this.messageService.add({severity:'success',summary:"Scientifique Ajouter !",detail:'Le scientifique a bien ete ajouter'})
+        this.index().subscribe()
+      },
+      error:()=>{}
+    }));
+  }
+
+  public update(request:any,id:number){
+    return this.http.put<EntityContainer<T>>(this.url+'/'+id,request)
+    .pipe(tap({
+      next:()=>{
+        this.messageService.add({severity:'success',summary:"Mis a jour réussi !",detail:'Le scientifique a bien été ajourner'})
+        this.index().subscribe()
+      },
+      error:()=>{}
+    }));
+  }
+
+  public delete(id:number){
+      return this.http.delete(this.url+"/"+id)
+      .pipe(tap({
+        next:()=>{
+          this.index().subscribe();
+        }
+      }));
+  }
+
+}
+
+

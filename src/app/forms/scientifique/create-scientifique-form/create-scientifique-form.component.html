@@ -1,0 +1,28 @@
+<div class="form">
+    <div class="form-row">
+        <div class="form-col">
+            <label for="nom">Nom</label>
+            <input type="text" pInputText id="nom" [(ngModel)]="values.nom">
+        </div>
+        <div class="form-col" style="margin-left: .5rem;">
+            <label for="prenom">Prenom</label>
+            <input type="text" pInputText id="prenom" [(ngModel)]="values.prenom">
+        </div>
+    </div>
+    <div class="form-section">
+        <label for="phone">Téléphone</label>
+        <input type="text" pInputText id="phone" [(ngModel)]="values.telephone">
+    </div>
+    <div class="form-section">
+        <label for="email">E-mail</label>
+        <input type="email" pInputText id="email" placeholder="eg: nom@domain.com" [(ngModel)]="values.email">
+    </div>
+    <div class="form-section">
+        <label for="specialite">Scpecialite</label>
+        <input type="email" pInputText id="specialiter" [(ngModel)]="values.specialite">
+    </div>
+    <div class="form-controll">
+        <button pButton class="p-button p-button-text" label="Annuler" (click)="onReset()"></button>
+        <button pButton class="p-button p-button-outlined" label="Ajouter" (click)="onSubmit()"></button>
+    </div>
+</div>
