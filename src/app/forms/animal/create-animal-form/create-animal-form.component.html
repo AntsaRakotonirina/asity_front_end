@@ -1,0 +1,79 @@
+<div class="note">
+    <span class="required-value">*</span> : valeur obligatoire
+</div>
+<div class="form">
+    <div class="form-row">
+        <div class="form-col">
+            <label for="categorie">Categorie</label>
+            <p-autoComplete 
+                [(ngModel)]="values.categorie"
+                [suggestions]="suggestions"
+                (completeMethod)="onSearch($event,'categorie')"
+                inputId="categorie"
+                [completeOnFocus]="true">
+            </p-autoComplete>
+        </div>
+        <div class="form-col">
+            <label for="endemicite">Endemicite</label>
+            <p-autoComplete 
+                [(ngModel)]="values.endemicite"
+                [suggestions]="suggestions"
+                (completeMethod)="onSearch($event,'endemicite')"
+                inputId="endemicite"
+                [completeOnFocus]="true">
+            </p-autoComplete>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-col">
+            <label for="espece">Espece <span class="required-value">*</span></label>
+            <p-autoComplete 
+                [(ngModel)]="values.espece"
+                [suggestions]="suggestions"
+                (completeMethod)="onSearch($event,'espece')"
+                inputId="espece"
+                [completeOnFocus]="true">
+            </p-autoComplete>
+        </div>
+        <div class="form-col">
+            <label for="famille">Famille <span class="required-value">*</span></label>
+            <p-autoComplete 
+                [(ngModel)]="values.famille"
+                [suggestions]="suggestions"
+                (completeMethod)="onSearch($event,'famille')"
+                inputId="famille"
+                [completeOnFocus]="true">
+            </p-autoComplete>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-col">
+            <label for="genre">Genre <span class="required-value">*</span> </label>
+            <p-autoComplete 
+            [(ngModel)]="values.genre"
+            [suggestions]="suggestions"
+            (completeMethod)="onSearch($event,'genre')"
+            inputId="genre"
+            [completeOnFocus]="true">
+            </p-autoComplete>
+        </div>
+        <div class="form-col">
+            <label for="guild">Guild</label>
+            <p-autoComplete 
+                [(ngModel)]="values.guild"
+                [suggestions]="suggestions"
+                (completeMethod)="onSearch($event,'guild')"
+                inputId="guild"
+                [completeOnFocus]="true">
+            </p-autoComplete>
+        </div>
+    </div>
+    <div class="form-row">
+        <p-selectButton [options]="_statusList" [(ngModel)]="values.status"></p-selectButton>
+    </div>
+
+    <div class="form-control">
+        <button class="p-button p-button-text" pButton (click)="onReset()">Annuler</button>
+        <button class="p-button p-button-outlined" pButton [disabled]="!formValid" (click)="onSubmit()">Ajouter!</button>
+    </div>
+</div>

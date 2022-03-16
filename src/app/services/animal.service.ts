@@ -4,6 +4,7 @@ import { tap } from 'rxjs';
 import { myEnv } from 'src/environments/myEnv';
 import { AnimalAttributes } from '../models/animal.model';
 import { EntityContainer, PaginatedData } from '../models/entityContainer.model';
+import { SearchRequest } from '../models/requests/searchRequest.model';
 
 @Injectable({
   providedIn: 'root'
@@ -31,7 +32,13 @@ export class AnimalService {
     );
   }
 
-  public store(){}
+  public store(request:any){
+    return this.http.post<EntityContainer<AnimalAttributes>>(myEnv.urls.animal,request)
+    .pipe(tap({
+      next:()=>{this.index({attribute:"nom",search:''}).subscribe()},
+      error:()=>{}
+    }));
+  }
 
   public update(){}
 
@@ -39,14 +46,14 @@ export class AnimalService {
       return this.http.delete(myEnv.urls.animal+"/"+id)
       .pipe(tap({
         next:()=>{
-          console.log("supprimer");
           this.index({attribute:"nom",search:''}).subscribe();
         }
       }));
   }
+
+  public autoComplete(request:SearchRequest ){
+    return this.http.get<{value:string}[]>(myEnv.urls.autocomplete+'/animaux?attribute='+request.attribute+"&search="+request.search);
+  }
 }
 
-export interface SearchRequest{
-  attribute:string,
-  search:string
-}
+

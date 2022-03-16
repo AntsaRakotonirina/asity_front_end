@@ -17,6 +17,9 @@
             <app-cards [id]="animal.id" 
             (delete)="onDelete(animal)"
             (update)="onUpdate(animal)">
+                <div header>
+                    <p-checkbox name="selected" [value]="animal.id" [(ngModel)]="_selectedIds"></p-checkbox>
+                </div>
                 <div content>
                     {{animal.attributes.nom_courrant}}
                 </div>
@@ -76,11 +79,9 @@
 </div>
 
 <div class="footer">
-    <div class="flex justify-content-center" *ngIf="animals">
-        <div *ngFor="let link of animals.meta.links" style="margin: 0 .5rem;">
-            <button  pButton class="p-button" [class]="link.active?'p-button-outlined':'p-button-text'" [disabled]="!link.url" (click)="onPage(link.url)">
-                {{link.label}}
-            </button>
-        </div>
+    <div class="dial">
+        <p-speedDial [model]="_dialItems" type="quarter-circle" direction="up-left" [radius]="120"></p-speedDial>
     </div>
+    <p-paginator *ngIf="animals" [rows]="15" [totalRecords]="animals.meta.total" (onPageChange)="onPage($event)"></p-paginator>
 </div>
+

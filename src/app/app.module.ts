@@ -13,21 +13,28 @@ import { AnimalComponent } from './views/animal/animal.component';
 import { SuiviComponent } from './views/suivi/suivi.component';
 import { ScientifiqueComponent } from './views/scientifique/scientifique.component';
 import { CardsComponent } from './widgets/cards/cards.component';
+import { TestFormComponent } from './forms/test-form/test-form.component';
+import { CreateAnimalFormComponent } from './forms/animal/create-animal-form/create-animal-form.component';
 
-import { InputTextModule } from "primeng/inputtext";
-import { PasswordModule } from "primeng/password";
-import { ButtonModule } from "primeng/button";
+
+import { AutoCompleteModule } from "primeng/autocomplete";
 import { CheckboxModule } from "primeng/checkbox";
-import { DividerModule } from "primeng/divider";
+import { CardModule } from "primeng/card";
+import { ContextMenuModule } from "primeng/contextmenu";
 import { ConfirmDialogModule } from "primeng/confirmdialog";
 import { ConfirmationService } from "primeng/api";
+import { ButtonModule } from "primeng/button";
+import { DividerModule } from "primeng/divider";
 import { DropdownModule } from "primeng/dropdown";
-import { CardModule } from "primeng/card";
+import { DialogService, DynamicDialogModule, DynamicDialogRef } from "primeng/dynamicdialog";
+import { InputTextModule } from "primeng/inputtext";
+import { MenuModule } from "primeng/menu";
+import { PasswordModule } from "primeng/password";
+import { PaginatorModule } from "primeng/paginator";
+import { SpeedDialModule } from "primeng/speeddial";
+import { SelectButtonModule } from "primeng/selectbutton";
 import { ScrollPanelModule } from "primeng/scrollpanel";
 import { SkeletonModule } from "primeng/skeleton";
-import { MenuModule } from "primeng/menu";
-import { ContextMenuModule } from "primeng/contextmenu";
-
 
 //Angular Native modules
 const commonModules = [
@@ -51,7 +58,12 @@ const  primesModules = [
   ScrollPanelModule,
   SkeletonModule,
   MenuModule,
-  ContextMenuModule
+  ContextMenuModule,
+  SpeedDialModule,
+  AutoCompleteModule,
+  SelectButtonModule,
+  DynamicDialogModule,
+  PaginatorModule
 ]
 
 @NgModule({
@@ -62,7 +74,9 @@ const  primesModules = [
     AnimalComponent,
     SuiviComponent,
     ScientifiqueComponent,
-    CardsComponent
+    CardsComponent,
+    TestFormComponent,
+    CreateAnimalFormComponent
   ],
   imports: [
     ...commonModules,
@@ -70,7 +84,9 @@ const  primesModules = [
   ],
   providers: [
     httpInterceptorProviders,
-    ConfirmationService
+    ConfirmationService,
+    DialogService,
+    DynamicDialogRef
   ],
   bootstrap: [AppComponent]
 })

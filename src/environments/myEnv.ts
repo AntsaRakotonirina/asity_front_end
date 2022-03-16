@@ -3,7 +3,8 @@ const URLS = {
     base:baseUrl,
     login:baseUrl+'/login',
     logout:baseUrl+'/logout',
-    animal:baseUrl+'/animaux'
+    animal:baseUrl+'/animaux',
+    autocomplete:baseUrl+'/autocomplete'
 }
 export const myEnv = {
     urls:URLS,

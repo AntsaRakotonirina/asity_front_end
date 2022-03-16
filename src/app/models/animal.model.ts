@@ -43,3 +43,13 @@ export interface Note{
     'titre':string,
     'valeur':string
 }
+
+export interface animalFormsAttributes{
+    'categorie' : string,
+    'endemicite' : string,
+    'espece'  : string,
+    'famille' : string,
+    'genre' : string,
+    'guild' : string,
+    'status' : string,
+  }

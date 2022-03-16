@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { TestFormComponent } from './forms/test-form/test-form.component';
 import { AuthGuard } from './guards/auth.guard';
 import { LoginGuard } from './guards/login.guard';
 import { AnimalComponent } from './views/animal/animal.component';
@@ -15,7 +16,8 @@ const routes: Routes = [
     {path:'',redirectTo:'animal',pathMatch:'full'},
     {path:'animal',component:AnimalComponent},
     {path:'scientifique',component:ScientifiqueComponent},
-    {path:'suivi',component:SuiviComponent}
+    {path:'suivi',component:SuiviComponent},
+    {path:'test',component:TestFormComponent}
   ]}
 ];
 
