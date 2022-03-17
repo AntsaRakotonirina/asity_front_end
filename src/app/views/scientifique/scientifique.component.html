@@ -10,7 +10,7 @@
         <div class="list-item"  *ngFor="let scientifique of scientifiques.data">
             <div class="grid">
                 <div class="col-fixed">
-                    <p-checkbox name="selected" [value]="scientifique.id" [(ngModel)]="_selectedIds"></p-checkbox>
+                    <p-checkbox name="selected" [value]="scientifique.id" [(ngModel)]="_selectedIds" *ngIf="authService.userIsAdmin"></p-checkbox>
                 </div>
                 <div class="col-fixed">
                     <div class="name">
@@ -30,10 +30,16 @@
                     </div>
                 </div>
                 <div class="col-fixed">
-                    <button class="p-button p-button-text p-button-secondary" (click)="onUpdate(scientifique)" >
+                    <button 
+                    class="p-button p-button-text p-button-secondary" 
+                    (click)="onUpdate(scientifique)" 
+                    *ngIf="authService.userIsAdmin">
                         <i class="pi pi-pencil"></i>
                     </button>
-                    <button class="p-button p-button-text p-button-danger" (click)="onDelete(scientifique)">
+                    <button 
+                    class="p-button p-button-text p-button-danger" 
+                    (click)="onDelete(scientifique)"
+                    *ngIf="authService.userIsAdmin">
                         <i class="pi pi-trash"></i>
                     </button>
                 </div>
@@ -44,7 +50,7 @@
 </div>
 
 <div class="footer">
-    <div class="dial">
+    <div class="dial" *ngIf="authService.userIsAdmin">
         <p-speedDial [model]="_dialItems" type="quarter-circle" direction="up-left" [radius]="130"></p-speedDial>
     </div>
     <p-paginator *ngIf="scientifiques" [rows]="15" [totalRecords]="scientifiques.meta.total" (onPageChange)="onPage($event)"></p-paginator>

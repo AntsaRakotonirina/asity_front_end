@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MessageService } from 'primeng/api';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { animalFormsAttributes } from 'src/app/models/animal.model';
 import { SearchRequest } from 'src/app/models/requests/searchRequest.model';
@@ -8,7 +7,7 @@ import { AnimalService } from 'src/app/services/animal.service';
 @Component({
   selector: 'app-create-animal-form',
   templateUrl: './create-animal-form.component.html',
-  styleUrls: ['./create-animal-form.component.css']
+  styleUrls: ['../../form.component.css','./create-animal-form.component.css']
 })
 export class CreateAnimalFormComponent implements OnInit {
   values:animalFormsAttributes={
@@ -34,8 +33,7 @@ export class CreateAnimalFormComponent implements OnInit {
 
   constructor(
     private animalService:AnimalService,
-    private ref:DynamicDialogRef,
-    private messageService:MessageService
+    private ref:DynamicDialogRef
   ) { }
   
   ngOnInit(): void {
@@ -70,8 +68,7 @@ export class CreateAnimalFormComponent implements OnInit {
     this.animalService.store(this.values)
     .subscribe({
       next:()=>{
-        this.ref.close()
-        this.messageService.add({severity:'success',summary:"Animal Ajouter !",detail:'L\'animal a bien ete ajouter'})
+        this.ref.close();
       },
       error:(error)=>{}
     });

@@ -6,6 +6,7 @@ import { AnimalAttributes } from 'src/app/models/animal.model';
 import { EntityContainer } from 'src/app/models/entityContainer.model';
 import { SearchRequest } from 'src/app/models/requests/searchRequest.model';
 import { AnimalService } from 'src/app/services/animal.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { AbstractComponent } from '../abstractView.component';
 
 @Component({
@@ -35,9 +36,10 @@ export class AnimalComponent extends AbstractComponent<AnimalAttributes> impleme
   constructor(
     protected animalService:AnimalService,
     protected override confirmationService:ConfirmationService,
+    public override authService:AuthService,
     private dialogService:DialogService
   ) {
-    super(animalService,confirmationService);
+    super(animalService,confirmationService,authService);
   }
 
   override search(){

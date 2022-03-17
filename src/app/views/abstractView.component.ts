@@ -2,6 +2,7 @@ import { ConfirmationService, MenuItem } from 'primeng/api';
 import { EntityContainer} from 'src/app/models/entityContainer.model';
 import { SearchRequest } from 'src/app/models/requests/searchRequest.model';
 import { AbstractService } from '../services/Abstract.service';
+import { AuthService } from '../services/auth.service';
 
 
 export abstract class AbstractComponent<T>{
@@ -15,7 +16,8 @@ export abstract class AbstractComponent<T>{
 
   constructor(
     protected baseService:AbstractService<T>,
-    protected confirmationService:ConfirmationService
+    protected confirmationService:ConfirmationService,
+    public authService:AuthService
   ) { }
 
   search(){

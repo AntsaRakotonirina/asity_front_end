@@ -9,3 +9,7 @@ export interface LoginMessage extends MessageModel{
 export interface ErrorMessage extends MessageModel{
     "errors":any
 }
+
+export interface DataMessage<T> extends MessageModel{
+    "data":T
+}

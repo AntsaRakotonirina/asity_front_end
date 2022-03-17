@@ -1,0 +1,12 @@
+:host{
+    height: 100%;
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+}
+.dial{
+    position: absolute;
+    bottom: 80px;
+    right: 250px;
+}

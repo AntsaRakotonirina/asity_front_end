@@ -1,0 +1,44 @@
+
+<div class="form">
+    <div class="form-row">
+        <label for="name">Nom</label>
+        <span class="p-input-icon-right">
+            <input type="text" id="name" pInputText [(ngModel)]="_data.name">
+        </span>
+    </div>
+    <div class="form-row">
+        <label>Type d'utilisateur</label>
+        <p-selectButton [options]="_adminOptions" [(ngModel)]="_data.isAdmin" optionLabel="label" optionValue="value"></p-selectButton>
+    </div>
+    <div class="form-row">
+        <label for="password">Mot de passe</label>
+        <span class="p-input-icon-right">
+            
+            <input 
+            [type]="_passwordShow ? 'text':'password'" 
+            pInputText
+            id="password"
+            [(ngModel)]="_data.password"
+            />
+            <i class="pi pi-eye" (click)="_passwordShow = true" *ngIf="!_passwordShow"></i>
+            <i class="pi pi-eye-slash" (click)="_passwordShow = false" *ngIf="_passwordShow"></i>
+        </span>
+    </div>
+    <div class="form-row">
+        <label for="confirm">Confirmer le mot de passe</label>
+        <span class="p-input-icon-right">
+            <input 
+                [type]="_passwordShow ? 'text':'password'" 
+                pInputText
+                id="confirm"
+                [(ngModel)]="this._data.password_confirmation"
+            />
+            <i class="pi pi-eye" (click)="_passwordShow = true" *ngIf="!_passwordShow"></i>
+            <i class="pi pi-eye-slash" (click)="_passwordShow = false" *ngIf="_passwordShow"></i>
+        </span>
+    </div>
+    <div class="form-control">
+        <button class="p-button p-button-text" pButton (click)="onReset()">Annuler</button>
+        <button class="p-button p-button-outlined" pButton [disabled]="!formValid" (click)="onSubmit()">Ajouter!</button>
+    </div>
+</div>

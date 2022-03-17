@@ -1,0 +1,31 @@
+<p-table [value]="users.data" responsiveLayout="scroll" *ngIf="users">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Nom d'utilisateur</th>
+            <th>Administrateur</th>
+            <th>Commandes</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-user>
+        <tr>
+            <td>
+                {{user.attributes.name}}
+            </td>
+            <td>
+                <p-inputSwitch [(ngModel)]="user.attributes.isAdmin" (onChange)="changeAdmin(user)"></p-inputSwitch>
+            </td>
+            <td>
+                <button class="p-button p-button-text p-button-danger" (click)="onDelete(user)" *ngIf="myUser?.id !== user.id">
+                    <i class="pi pi-trash"></i>
+                </button>
+            </td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+        <p-paginator *ngIf="users" [rows]="15" [totalRecords]="users.meta.total" (onPageChange)="onPage($event)"></p-paginator>
+    </ng-template>
+    
+</p-table>
+<div class="dial" *ngIf="authService.userIsAdmin" >
+    <p-speedDial [model]="_dialItems" direction="left"></p-speedDial>
+</div>

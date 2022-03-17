@@ -12,7 +12,15 @@ import { AbstractService } from './Abstract.service';
 export class AnimalService extends AbstractService<AnimalAttributes>{
   public override url: string = myEnv.urls.animal;
   protected override defaultAttribute: string = 'nom';
-  constructor(protected override http:HttpClient,protected override messageService:MessageService) {
+
+  protected override valueName:string = 'Animal';
+  protected override updateMessage: string = "L'animal a ete mis a jour";
+  protected override deleteMessage: string = "L'animal a ete supprimer";
+  protected override storeMessage: string = "L'animal a ete crée";
+  
+  constructor(
+    protected override http:HttpClient,
+    protected override messageService:MessageService) {
     super(http,messageService);
   }
 

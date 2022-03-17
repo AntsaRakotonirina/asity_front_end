@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ConfirmationService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
-import { FileUpload } from 'primeng/fileupload';
 import { CreateScientifiqueFormComponent } from 'src/app/forms/scientifique/create-scientifique-form/create-scientifique-form.component';
 import { UpdateScientifiqueFormComponent } from 'src/app/forms/scientifique/update-scientifique-form/update-scientifique-form.component';
 import { UploadComponent } from 'src/app/forms/upload-component/upload-component.component';
 import { EntityContainer } from 'src/app/models/entityContainer.model';
 import { ScientifiqueAttributes } from 'src/app/models/scientifique.model';
+import { AuthService } from 'src/app/services/auth.service';
 import { ScientifiqueService } from 'src/app/services/scientifique.service';
 import { myEnv } from 'src/environments/myEnv';
 import { AbstractComponent } from '../abstractView.component';
@@ -21,9 +21,10 @@ export class ScientifiqueComponent extends AbstractComponent<ScientifiqueAttribu
   constructor(
     protected scientifiqueService:ScientifiqueService,
     protected override confirmationService:ConfirmationService,
+    public override authService:AuthService,
     private dialogService:DialogService
   ) {
-    super(scientifiqueService,confirmationService);
+    super(scientifiqueService,confirmationService,authService);
   }
 
   get scientifiques(){

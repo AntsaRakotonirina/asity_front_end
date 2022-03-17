@@ -9,6 +9,12 @@ export abstract class AbstractService<T> {
 
   protected _data!:PaginatedData<EntityContainer<T>>
   protected defaultAttribute:string='';
+
+  protected valueName:string = 'Entiter';
+  protected storeMessage:string = 'L\'entiter a bien ete ajouter';
+  protected updateMessage:string = 'L\'entiter a bien été ajourner';
+  protected deleteMessage:string = 'L\'entiter a bien été supprimer';
+
   public url:string = myEnv.urls.base;
 
   constructor(protected http:HttpClient,protected messageService:MessageService) {}
@@ -30,7 +36,7 @@ export abstract class AbstractService<T> {
     return this.http.post<EntityContainer<T>>(this.url,request)
     .pipe(tap({
       next:()=>{
-        this.messageService.add({severity:'success',summary:"Scientifique Ajouter !",detail:'L\'entiter a bien ete ajouter'})
+        this.messageService.add({severity:'success',summary:`${this.valueName} ajouter !`,detail:this.storeMessage})
         this.index().subscribe()
       },
       error:()=>{}
@@ -41,7 +47,7 @@ export abstract class AbstractService<T> {
     return this.http.put<EntityContainer<T>>(this.url+'/'+id,request)
     .pipe(tap({
       next:()=>{
-        this.messageService.add({severity:'success',summary:"Mis a jour réussi !",detail:'L\'entiter a bien été ajourner'})
+        this.messageService.add({severity:'success',summary:"Mis a jour réussi !",detail:this.updateMessage})
         this.index().subscribe()
       },
       error:()=>{}
@@ -57,7 +63,7 @@ export abstract class AbstractService<T> {
           if(index > 0){
             this._data.data.splice(index,1);
           }
-          this.messageService.add({severity:'success',summary:'Supprimer !',detail:'L\'entiter a bien été supprimer'})
+          this.messageService.add({severity:'success',summary:'Suppretion réussi !',detail:this.deleteMessage})
         }
       }));
   }

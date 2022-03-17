@@ -14,9 +14,9 @@
 <div class="list" >
     <div class="grid" style="padding: 1rem;" *ngIf="animals">
         <div class="col-12 md:col-6 lg:col-3" *ngFor="let animal of animals.data">
-            <app-cards [id]="animal.id" 
-            (delete)="onDelete(animal)">
-                <div header>
+            <app-cards [id]="animal.id" [isEditable]="authService.userIsAdmin || false" 
+            (delete)="onDelete(animal)" >
+                <div header *ngIf="authService.userIsAdmin">
                     <p-checkbox name="selected" [value]="animal.id" [(ngModel)]="_selectedIds"></p-checkbox>
                 </div>
                 <div content>
@@ -78,7 +78,7 @@
 </div>
 
 <div class="footer">
-    <div class="dial">
+    <div class="dial" *ngIf="authService.userIsAdmin">
         <p-speedDial [model]="_dialItems" type="quarter-circle" direction="up-left" [radius]="120"></p-speedDial>
     </div>
     <p-paginator *ngIf="animals" [rows]="15" [totalRecords]="animals.meta.total" (onPageChange)="onPage($event)"></p-paginator>

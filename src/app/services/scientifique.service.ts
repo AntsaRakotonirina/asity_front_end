@@ -11,7 +11,14 @@ import { AbstractService } from './Abstract.service';
 export class ScientifiqueService extends AbstractService<ScientifiqueAttributes> {
   public override url: string= myEnv.urls.scientifique;
 
-  constructor(protected override http:HttpClient,protected override messageService:MessageService) {
+  protected override valueName:string = 'Scientifique';
+  protected override updateMessage: string = "Le scientifique a ete mis a jour";
+  protected override deleteMessage: string = "Le scientifique a ete supprimer";
+  protected override storeMessage: string = "Le scientifique a ete crée";
+
+  constructor(
+    protected override http:HttpClient,
+    protected override messageService:MessageService) {
     super(http,messageService);
   }
 

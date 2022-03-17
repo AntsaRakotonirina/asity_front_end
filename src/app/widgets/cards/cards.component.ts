@@ -10,16 +10,19 @@ import { EntityContainer } from 'src/app/models/entityContainer.model';
 })
 export class CardsComponent implements OnInit {
   @Input() id:number = 0;
+  @Input() isEditable:boolean = true;
   @Output() delete:EventEmitter<any> = new EventEmitter();
-  @Output() update:EventEmitter<any> = new EventEmitter();
+  @Output() info:EventEmitter<any> = new EventEmitter();
 
   _menuItems: MenuItem[]=[];
   constructor() { }
   ngOnInit(): void {
-    this._menuItems = [
-      {label:"Supprimer",icon:'pi pi-fw pi-trash',command:()=>{this.onDelete()}},
-      {label:"Editer",icon:'pi pi-fw pi-pencil',command:()=>{this.onUpdate()}},
-    ]
+    if(this.isEditable){
+      this._menuItems = [
+        {label:"Supprimer",icon:'pi pi-fw pi-trash',command:()=>{this.onDelete()}},
+      ]
+    }
+    this._menuItems.push({label:"Information",icon:'pi pi-fw pi-info-circle',command:()=>{this.onUpdate()}})
   }
 
   onDelete(){
@@ -27,6 +30,6 @@ export class CardsComponent implements OnInit {
   }
 
   onUpdate(){
-    this.update.emit(this.id);
+    this.info.emit(this.id);
   }
 }

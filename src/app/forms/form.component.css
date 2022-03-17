@@ -1,0 +1,30 @@
+.form{
+    padding: 1rem;
+    overflow: hidden;
+}
+.form .form-row{
+    margin: .5rem 0;
+}
+.form .form-col{
+    margin: 0 1rem;
+}
+label{
+    display: block;
+    margin-bottom: .5rem;
+    font-size: 10pt;
+    color: var(--green-600);
+}
+
+.form-control button{
+    margin: 1rem .5rem;
+}
+
+.required-value{
+    color: var(--red-500);
+}
+
+.note{
+    margin-left: 2rem;
+    color: var(--gray-400);
+    font-size: 10pt;
+}

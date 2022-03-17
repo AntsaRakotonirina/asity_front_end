@@ -6,6 +6,7 @@
         <a [routerLink]="[ '/app/animal' ]" routerLinkActive="active">Animal</a>
         <a [routerLink]="[ '/app/suivi' ]" routerLinkActive="active">Suivi</a>
         <a [routerLink]="[ '/app/scientifique' ]" routerLinkActive="active">Scientifique</a>
+        <a [routerLink]="[ '/app/settings' ]" routerLinkActive="active" *ngIf="authService.userIsAdmin">Paramettres</a>
         <a [routerLink]="[ '/app/test' ]" routerLinkActive="active">Test</a>
     </nav>
     <button class=" p-button-outlined" pButton icon="pi pi-sign-out" label="Se deconnecter" (click)="onLogout()"></button>
