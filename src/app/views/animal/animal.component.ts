@@ -73,7 +73,17 @@ export class AnimalComponent extends AbstractComponent<AnimalAttributes> impleme
       },
       {
         icon: 'pi pi-trash',
-        command:()=>{}
+        command:()=>{
+          this.confirmationService.confirm({
+            header:"Suppresion",
+            message: "Voulez vous vraiment retirer ces animaux?",
+            acceptLabel: "Supprimer",
+            icon:"pi pi-exclamation-triangle",
+            accept:()=>{
+              this.massDelete(0);
+            }
+          })
+        }
       },
     ]
   }

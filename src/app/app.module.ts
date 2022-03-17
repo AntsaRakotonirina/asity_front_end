@@ -15,18 +15,21 @@ import { ScientifiqueComponent } from './views/scientifique/scientifique.compone
 import { CardsComponent } from './widgets/cards/cards.component';
 import { TestFormComponent } from './forms/test-form/test-form.component';
 import { CreateAnimalFormComponent } from './forms/animal/create-animal-form/create-animal-form.component';
-
+import { CreateScientifiqueFormComponent } from './forms/scientifique/create-scientifique-form/create-scientifique-form.component';
+import { UpdateScientifiqueFormComponent } from './forms/scientifique/update-scientifique-form/update-scientifique-form.component';
+import { UploadComponent } from './forms/upload-component/upload-component.component';
 
 import { AutoCompleteModule } from "primeng/autocomplete";
+import { ButtonModule } from "primeng/button";
 import { CheckboxModule } from "primeng/checkbox";
 import { CardModule } from "primeng/card";
 import { ContextMenuModule } from "primeng/contextmenu";
 import { ConfirmDialogModule } from "primeng/confirmdialog";
 import { ConfirmationService, MessageService } from "primeng/api";
-import { ButtonModule } from "primeng/button";
 import { DividerModule } from "primeng/divider";
 import { DropdownModule } from "primeng/dropdown";
-import { DialogService, DynamicDialogModule, DynamicDialogRef } from "primeng/dynamicdialog";
+import { DialogService, DynamicDialogConfig, DynamicDialogModule, DynamicDialogRef } from "primeng/dynamicdialog";
+import { FileUploadModule } from "primeng/fileupload";
 import { InputTextModule } from "primeng/inputtext";
 import { InputMaskModule } from "primeng/inputmask";
 import { MenuModule } from "primeng/menu";
@@ -37,8 +40,6 @@ import { SelectButtonModule } from "primeng/selectbutton";
 import { ScrollPanelModule } from "primeng/scrollpanel";
 import { SkeletonModule } from "primeng/skeleton";
 import { ToastModule } from "primeng/toast";
-import { CreateScientifiqueFormComponent } from './forms/scientifique/create-scientifique-form/create-scientifique-form.component';
-import { UpdateScientifiqueFormComponent } from './forms/scientifique/update-scientifique-form/update-scientifique-form.component';
 
 //Angular Native modules
 const commonModules = [
@@ -69,7 +70,8 @@ const  primesModules = [
   DynamicDialogModule,
   PaginatorModule,
   InputMaskModule,
-  ToastModule
+  ToastModule,
+  FileUploadModule
 ]
 
 @NgModule({
@@ -84,7 +86,8 @@ const  primesModules = [
     TestFormComponent,
     CreateAnimalFormComponent,
     CreateScientifiqueFormComponent,
-    UpdateScientifiqueFormComponent
+    UpdateScientifiqueFormComponent,
+    UploadComponent
   ],
   imports: [
     ...commonModules,
@@ -95,7 +98,8 @@ const  primesModules = [
     ConfirmationService,
     DialogService,
     DynamicDialogRef,
-    MessageService
+    MessageService,
+    DynamicDialogConfig
   ],
   bootstrap: [AppComponent]
 })

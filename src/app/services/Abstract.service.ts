@@ -1,5 +1,4 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { tap } from 'rxjs';
 import { myEnv } from 'src/environments/myEnv';
@@ -31,7 +30,7 @@ export abstract class AbstractService<T> {
     return this.http.post<EntityContainer<T>>(this.url,request)
     .pipe(tap({
       next:()=>{
-        this.messageService.add({severity:'success',summary:"Scientifique Ajouter !",detail:'Le scientifique a bien ete ajouter'})
+        this.messageService.add({severity:'success',summary:"Scientifique Ajouter !",detail:'L\'entiter a bien ete ajouter'})
         this.index().subscribe()
       },
       error:()=>{}
@@ -42,7 +41,7 @@ export abstract class AbstractService<T> {
     return this.http.put<EntityContainer<T>>(this.url+'/'+id,request)
     .pipe(tap({
       next:()=>{
-        this.messageService.add({severity:'success',summary:"Mis a jour réussi !",detail:'Le scientifique a bien été ajourner'})
+        this.messageService.add({severity:'success',summary:"Mis a jour réussi !",detail:'L\'entiter a bien été ajourner'})
         this.index().subscribe()
       },
       error:()=>{}
@@ -53,7 +52,12 @@ export abstract class AbstractService<T> {
       return this.http.delete(this.url+"/"+id)
       .pipe(tap({
         next:()=>{
-          this.index().subscribe();
+          // this.index().subscribe();
+          let index =this._data.data.findIndex(element => element.id === id);
+          if(index > 0){
+            this._data.data.splice(index,1);
+          }
+          this.messageService.add({severity:'success',summary:'Supprimer !',detail:'L\'entiter a bien été supprimer'})
         }
       }));
   }

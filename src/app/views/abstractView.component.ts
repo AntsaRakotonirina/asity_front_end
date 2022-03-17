@@ -51,4 +51,15 @@ export abstract class AbstractComponent<T>{
     this.search()
   }
 
+  public massDelete(curent_index:number){
+    if(curent_index < this._selectedIds.length){
+      this.baseService.delete(this._selectedIds[curent_index])
+      .subscribe({
+        next:()=>{
+          this.massDelete(curent_index+1)
+        },
+        error:()=>{}
+      })
+    }
+  }
 }

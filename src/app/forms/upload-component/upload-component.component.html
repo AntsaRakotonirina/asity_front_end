@@ -1,0 +1,12 @@
+<p-fileUpload 
+name="file" 
+[url]="url" 
+accept="text/csv"
+invalidFileTypeMessageSummary="Type de fichier invalid"
+invalidFileTypeMessageDetail="Veuillez selectionner un fichier csv"
+chooseLabel="Choisir"
+uploadLabel="Envoyer"
+cancelLabel="Annuler"
+(onError)="onError()"
+(onUpload)="onUpload()"
+></p-fileUpload>

@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ConfirmationService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
+import { FileUpload } from 'primeng/fileupload';
 import { CreateScientifiqueFormComponent } from 'src/app/forms/scientifique/create-scientifique-form/create-scientifique-form.component';
 import { UpdateScientifiqueFormComponent } from 'src/app/forms/scientifique/update-scientifique-form/update-scientifique-form.component';
+import { UploadComponent } from 'src/app/forms/upload-component/upload-component.component';
 import { EntityContainer } from 'src/app/models/entityContainer.model';
 import { ScientifiqueAttributes } from 'src/app/models/scientifique.model';
 import { ScientifiqueService } from 'src/app/services/scientifique.service';
+import { myEnv } from 'src/environments/myEnv';
 import { AbstractComponent } from '../abstractView.component';
 
 @Component({
@@ -47,7 +50,10 @@ export class ScientifiqueComponent extends AbstractComponent<ScientifiqueAttribu
       {
         icon: 'pi pi-upload',
         command:()=>{
-          this.search()
+          this.dialogService.open(UploadComponent,{
+            header:"Charger les scientifiques",
+            data:{url:myEnv.urls.scientifique+'/file'}
+          })
         }
       },
       {
@@ -58,7 +64,17 @@ export class ScientifiqueComponent extends AbstractComponent<ScientifiqueAttribu
       },
       {
         icon: 'pi pi-trash',
-        command:()=>{}
+        command:()=>{
+          this.confirmationService.confirm({
+            header:"Suppresion",
+            message: "Voulez vous vraiment retirer ces scientifiques?",
+            acceptLabel: "Supprimer",
+            icon:"pi pi-exclamation-triangle",
+            accept:()=>{
+              this.massDelete(0);
+            }
+          })
+        }
       },
     ]
   }
