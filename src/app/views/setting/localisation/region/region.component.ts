@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 
 @Component({
@@ -9,12 +9,15 @@ import { MenuItem } from 'primeng/api';
 })
 export class RegionComponent implements OnInit {
   public bread!:MenuItem[];
-  constructor(private router:Router) { }
+  
+  constructor( private router:Router, private route:ActivatedRoute) { }
+
 
   ngOnInit(): void {
     this.bread = [
-      {label:' Site Parent',icon:'pi pi-home',command:()=>{this.router.navigateByUrl('/app/settings/localisations/parent')}},
-      {label:'Region'}
+      {icon:'pi pi-home',command:()=>{this.router.navigateByUrl('/app/settings/localisations/home')}},
+      {label:'Regions',icon:'pi pi-home',command:()=>{}},
+      {label:'Sites'}
     ]
   }
 

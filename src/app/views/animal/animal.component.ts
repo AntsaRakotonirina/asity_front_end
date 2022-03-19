@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { CreateAnimalFormComponent } from 'src/app/forms/animal/create-animal-form/create-animal-form.component';
@@ -37,7 +38,8 @@ export class AnimalComponent extends AbstractComponent<AnimalAttributes> impleme
     protected animalService:AnimalService,
     protected override confirmationService:ConfirmationService,
     public override authService:AuthService,
-    private dialogService:DialogService
+    private dialogService:DialogService,
+    private router:Router
   ) {
     super(animalService,confirmationService,authService);
   }
@@ -97,6 +99,10 @@ export class AnimalComponent extends AbstractComponent<AnimalAttributes> impleme
   override onDelete(animal:EntityContainer<AnimalAttributes>){
     this._deleteMessage = "Etes vous sur de vouloir retirer le "+animal.attributes.nom_courrant+" ?";
     super.onDelete(animal);
+  }
+
+  onInfo(animal:EntityContainer<AnimalAttributes>){
+    this.router.navigateByUrl(`/app/animal/${animal.id}`)
   }
 
 }

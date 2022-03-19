@@ -55,7 +55,10 @@ export class AuthService {
     return this.http.post<LoginMessage>(myEnv.urls.login,creds)
     .pipe(
       tap({
-        next:(response)=>{this.addToken(response.token)},
+        next:(response)=>{
+          this.addToken(response.token);
+          this.user = response.user;
+        },
         error:()=>{},
         complete:()=>{},
       })

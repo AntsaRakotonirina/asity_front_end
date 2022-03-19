@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ConfirmationService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { CreateUserComponent } from 'src/app/forms/user/create-user/create-user.component';
-import { UpdateUserComponent } from 'src/app/forms/user/update-user/update-user.component';
 import { EntityContainer } from 'src/app/models/entityContainer.model';
 import { UserAttributes } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth.service';
@@ -51,12 +50,6 @@ export class UserComponent extends AbstractComponent<UserAttributes> implements 
         }
       }
     ]
-  }
-  onEdit(user:any){
-    this.dialogService.open(UpdateUserComponent,{
-      header:"Metre l'utilisateur a jour",
-      data:user
-    })
   }
   changeAdmin(user:EntityContainer<UserAttributes>){
     this.userService.update(user.attributes,user.id)

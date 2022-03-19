@@ -1,0 +1,11 @@
+<p-breadcrumb [home]="bread"></p-breadcrumb>
+
+<div>
+    {{parents | json}}
+</div>
+<div *ngIf="parents">
+    <div *ngFor="let parent of parents.data" >
+        <a [routerLink]="['../parent/'+parent.id]"  >{{parent.attributes.aireProteger}}</a>
+    </div>
+</div>
+

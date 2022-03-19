@@ -52,4 +52,5 @@ export interface animalFormsAttributes{
     'genre' : string,
     'guild' : string,
     'status' : string,
+    'count_type':string,
   }

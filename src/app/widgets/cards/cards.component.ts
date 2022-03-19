@@ -1,7 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MenuItem } from 'primeng/api';
-import { AnimalAttributes } from 'src/app/models/animal.model';
-import { EntityContainer } from 'src/app/models/entityContainer.model';
 
 @Component({
   selector: 'app-cards',
@@ -22,14 +20,14 @@ export class CardsComponent implements OnInit {
         {label:"Supprimer",icon:'pi pi-fw pi-trash',command:()=>{this.onDelete()}},
       ]
     }
-    this._menuItems.push({label:"Information",icon:'pi pi-fw pi-info-circle',command:()=>{this.onUpdate()}})
+    this._menuItems.push({label:"Information",icon:'pi pi-fw pi-info-circle',command:()=>{this.onInfo()}})
   }
 
   onDelete(){
     this.delete.emit(this.id);
   }
 
-  onUpdate(){
+  onInfo(){
     this.info.emit(this.id);
   }
 }

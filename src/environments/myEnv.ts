@@ -7,7 +7,15 @@ const URLS = {
     animal:baseUrl+'/animaux',
     scientifique:baseUrl+'/scientifiques',
     autocomplete:baseUrl+'/autocomplete',
-    user:baseUrl+'/users'
+    user:baseUrl+'/users',
+    name:baseUrl+'/noms',
+    note:baseUrl+'/notes',
+    parent:baseUrl+'/siteparents',
+    region:baseUrl+'/regions',
+    site:baseUrl+'/sites',
+    suivi:baseUrl+'/suivis',
+    participation:baseUrl+'/participations',
+    localisation:baseUrl+'/localisations'
 }
 export const myEnv = {
     urls:URLS,

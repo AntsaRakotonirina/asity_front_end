@@ -18,7 +18,7 @@ export class AuthGuard implements CanActivate {
       this.router.navigate(['login']);
       return false;
     }
-    //si on est authentifier on cahrge les donnée utilisateur
+    //si on est authentifier on charge les donnée utilisateur
     return this.authService.user_obs.pipe(map((user)=> true ));
   }
   

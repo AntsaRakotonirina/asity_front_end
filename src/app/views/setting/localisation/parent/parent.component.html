@@ -1,2 +1,6 @@
-<p-breadcrumb [home]="bread"></p-breadcrumb>
-<a [routerLink]="['../region']">Region</a>
+<p-breadcrumb [model]="bread"></p-breadcrumb>
+<div *ngIf="regions">
+    <div *ngFor="let region of regions.data">
+        <a [routerLink]="['../../region/'+region.id]"  >{{region.attributes.nom}}</a>
+    </div>
+</div>

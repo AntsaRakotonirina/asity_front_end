@@ -17,7 +17,8 @@ export class CreateAnimalFormComponent implements OnInit {
     famille: '',
     genre: '',
     guild: '',
-    status: 'EN'
+    status: 'EN',
+    count_type: 'nombre'
   }
   
   _statusList:string[]=[
@@ -29,6 +30,9 @@ export class CreateAnimalFormComponent implements OnInit {
     'NT',
     'LC',
   ]
+
+  _countOptions:any[]=[{label:'Nombre',value:'nombre'},{label:'Abondance',value:'abondance'},{label:'Présence',value:'presence'}];
+
   suggestions:string[]=[];
 
   constructor(
