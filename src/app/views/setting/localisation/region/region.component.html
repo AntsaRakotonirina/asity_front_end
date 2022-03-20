@@ -1,2 +1,8 @@
-<p-breadcrumb [model]="bread" ></p-breadcrumb>
-<a [routerLink]="['../site']">site</a>
+<div *ngIf="regions" class="list">
+    <div *ngFor="let region of regions.data" class="list-item" (click)="onSelect(region.id)">
+        {{region.attributes.nom}}
+    </div>
+</div>
+<div class="controll">
+    <button class="p-button p-button-outlined" pButton label="Ajouter"></button>
+</div>

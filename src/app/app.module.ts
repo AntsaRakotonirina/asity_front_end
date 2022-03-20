@@ -25,6 +25,8 @@ import { ParentComponent } from './views/setting/localisation/parent/parent.comp
 import { RegionComponent } from './views/setting/localisation/region/region.component';
 import { SiteComponent } from './views/setting/localisation/site/site.component';
 import { CreateUserComponent } from './forms/user/create-user/create-user.component';
+import { SingleAnimalComponent } from './views/animal/single-animal/single-animal.component';
+import { HomeComponent } from './views/setting/localisation/home/home.component';
 
 import { AutoCompleteModule } from "primeng/autocomplete";
 import { ButtonModule } from "primeng/button";
@@ -44,14 +46,14 @@ import { MenuModule } from "primeng/menu";
 import { PasswordModule } from "primeng/password";
 import { PaginatorModule } from "primeng/paginator";
 import { SpeedDialModule } from "primeng/speeddial";
+import { SplitterModule } from "primeng/splitter";
 import { SelectButtonModule } from "primeng/selectbutton";
 import { ScrollPanelModule } from "primeng/scrollpanel";
 import { SkeletonModule } from "primeng/skeleton";
 import { ToastModule } from "primeng/toast";
 import { TabMenuModule } from "primeng/tabmenu";
 import { TableModule } from "primeng/table";
-import { SingleAnimalComponent } from './views/animal/single-animal/single-animal.component';
-import { HomeComponent } from './views/setting/localisation/home/home.component';
+
 
 
 //Angular Native modules
@@ -87,7 +89,8 @@ const  primesModules = [
   TabMenuModule,
   BreadcrumbModule,
   InputSwitchModule,
-  TableModule
+  TableModule,
+  SplitterModule
 ]
 
 @NgModule({

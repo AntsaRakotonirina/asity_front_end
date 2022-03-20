@@ -1,22 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { MenuItem } from 'primeng/api';
+import { Component, Input, OnInit } from '@angular/core';
+import { SiteService } from 'src/app/services/localisation/site.service';
 
 @Component({
   selector: 'app-site',
   templateUrl: './site.component.html',
-  styleUrls: ['./site.component.css']
+  styleUrls: ['../localisation.component.css','./site.component.css']
 })
 export class SiteComponent implements OnInit {
-  public bread!:MenuItem[];
-  constructor(private router:Router) { }
+  
+  constructor(private siteService:SiteService) { }
 
-  ngOnInit(): void {
-    this.bread = [
-      {label:' Site Parent',icon:'pi pi-home',command:()=>{this.router.navigateByUrl('/app/settings/localisations/parent')}},
-      {label:'Region',command:()=>{this.router.navigateByUrl('/app/settings/localisations/region')}},
-      {label:'Site'}
-    ]
-  }
+  get  sites(){return this.siteService.sites}
+  
+  ngOnInit(): void {}
 
 }

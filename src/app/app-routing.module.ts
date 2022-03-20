@@ -11,9 +11,6 @@ import { MainComponent } from './views/main/main.component';
 import { ScientifiqueComponent } from './views/scientifique/scientifique.component';
 import { HomeComponent } from './views/setting/localisation/home/home.component';
 import { LocalisationComponent } from './views/setting/localisation/localisation.component';
-import { ParentComponent } from './views/setting/localisation/parent/parent.component';
-import { RegionComponent } from './views/setting/localisation/region/region.component';
-import { SiteComponent } from './views/setting/localisation/site/site.component';
 import { SettingComponent } from './views/setting/setting.component';
 import { UserComponent } from './views/setting/user/user.component';
 import { SuiviComponent } from './views/suivi/suivi.component';
@@ -22,10 +19,7 @@ const settingRoutes:Routes = [
   {path:'',redirectTo:'localisations',pathMatch:'full'},
   {path:'localisations',component:LocalisationComponent,children:[
     {path:'',redirectTo:'home',pathMatch:'full'},
-    {path:'home',component:HomeComponent},
-    {path:'parent/:id',component:ParentComponent},
-    {path:'region/:id',component:RegionComponent},
-    {path:'site/:id',component:SiteComponent}
+    {path:'home',component:HomeComponent}
   ]},
   {path:'user',component:UserComponent}
 ]

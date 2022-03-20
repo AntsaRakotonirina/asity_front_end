@@ -1,0 +1,39 @@
+:host{
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+.list{
+    height: 85%;
+    overflow-y: scroll;
+}
+.controll{
+    background-color: #ffffff;
+    position: absolute;
+    padding: 1rem;
+    bottom: 0;
+    width: 100%;
+}
+.controll button{
+    width: 100%;
+}
+.list-item{
+    padding: 1rem;
+    margin: .5rem;
+    border: solid .5px #f0f0f0;
+    border-radius: 5px;
+    transition: .3s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.list-item:hover{
+    background-color: var(--green-50);
+    border: solid .5px var(--green-500);
+    box-shadow: 0px 3px 4px 0px rgb(86 86 86 / 21%);
+}
+.list::-webkit-scrollbar {
+    width: 7px;
+}
+  
+.list::-webkit-scrollbar-thumb {
+  background-color: var(--green-100);
+}

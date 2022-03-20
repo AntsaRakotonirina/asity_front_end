@@ -1,7 +1,7 @@
 import { Observable } from "rxjs";
 
 export interface RestInterface{
-    index  ():Observable<unknown>,
+    index  (id?:number):Observable<unknown>,
     store  (payload:unknown):Observable<unknown>,
     update (data:unknown,id:number):Observable<unknown>,
     show   (id:number):Observable<unknown>,

@@ -1,1 +1,8 @@
-<p-breadcrumb [model]="bread"></p-breadcrumb>
+<div *ngIf="sites" class="list">
+    <div *ngFor="let site of sites.data" class="list-item">
+        {{site.attributes.nom}}
+    </div>
+</div>
+<div class="controll">
+    <button class="p-button p-button-outlined" pButton label="Ajouter"></button>
+</div>
