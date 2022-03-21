@@ -1,1 +1,36 @@
-<p>suivi works!</p>
+<div style="margin-top: .5rem;">
+    <label>Depuis: </label>
+    <p-calendar [(ngModel)]="_filterDates.from" (onSelect)="onFilter()" inputId="from"></p-calendar>
+    <label style="margin-left: 1rem;">Jusqu'a: </label>
+    <p-calendar [(ngModel)]="_filterDates.to" (onSelect)="onFilter()" inputId="to"></p-calendar>
+</div>
+<div class="list">
+    <div *ngIf="suivis" class="grid" style="padding: 1rem;">
+        <div *ngFor="let suivi of suivis.data" class="col-12 md:col-6 lg:col-3">
+            <app-cards [id]="suivi.id" [isEditable]="authService.userIsAdmin || false" 
+            (delete)="onDelete(suivi)"
+            (info)="onInfo(suivi)" >
+                <div header *ngIf="authService.userIsAdmin">
+                    <p-checkbox name="selected" [value]="suivi.id" [(ngModel)]="_selectedIds"></p-checkbox>
+                </div>
+                <div content>
+                    <div class="date">
+                        Suivi du {{suivi.attributes.default_date | date :'d, MMM y'}} <br>
+                    </div>
+                    <div class="place" *ngIf="suivi.attributes.first_localisation">
+                        a {{suivi.attributes.first_localisation.attributes.site}}
+                    </div>
+                    
+                </div>
+            </app-cards>
+        </div>
+    </div>
+</div>
+
+
+<footer>
+    <p-paginator *ngIf="suivis" [rows]="15" [totalRecords]="suivis.meta.total" (onPageChange)="onPage($event)"></p-paginator>
+    <div class="dial" *ngIf="authService.userIsAdmin">
+        <p-speedDial [model]="_dialItems" type="quarter-circle" direction="up-left" [radius]="120"></p-speedDial>
+    </div>
+</footer>

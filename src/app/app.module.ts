@@ -27,12 +27,14 @@ import { SiteComponent } from './views/setting/localisation/site/site.component'
 import { CreateUserComponent } from './forms/user/create-user/create-user.component';
 import { SingleAnimalComponent } from './views/animal/single-animal/single-animal.component';
 import { HomeComponent } from './views/setting/localisation/home/home.component';
+import { CreateSuiviComponent } from './forms/suivi/create-suivi/create-suivi.component';
 
 import { AutoCompleteModule } from "primeng/autocomplete";
 import { ButtonModule } from "primeng/button";
 import { BreadcrumbModule } from "primeng/breadcrumb";
 import { CheckboxModule } from "primeng/checkbox";
 import { CardModule } from "primeng/card";
+import { CalendarModule } from "primeng/calendar";
 import { ContextMenuModule } from "primeng/contextmenu";
 import { ConfirmDialogModule } from "primeng/confirmdialog";
 import { ConfirmationService, MessageService } from "primeng/api";
@@ -53,6 +55,7 @@ import { SkeletonModule } from "primeng/skeleton";
 import { ToastModule } from "primeng/toast";
 import { TabMenuModule } from "primeng/tabmenu";
 import { TableModule } from "primeng/table";
+
 
 
 
@@ -90,7 +93,8 @@ const  primesModules = [
   BreadcrumbModule,
   InputSwitchModule,
   TableModule,
-  SplitterModule
+  SplitterModule,
+  CalendarModule
 ]
 
 @NgModule({
@@ -115,7 +119,8 @@ const  primesModules = [
     SiteComponent,
     CreateUserComponent,
     SingleAnimalComponent,
-    HomeComponent
+    HomeComponent,
+    CreateSuiviComponent
   ],
   imports: [
     ...commonModules,

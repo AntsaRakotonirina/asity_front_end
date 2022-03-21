@@ -60,8 +60,12 @@ export abstract class AbstractComponent<T>{
         next:()=>{
           this.massDelete(curent_index+1)
         },
-        error:()=>{}
+        error:()=>{
+          this.massDelete(curent_index+1)
+        }
       })
+    }else {
+      this._selectedIds.splice(0);
     }
   }
 }

@@ -1,5 +1,5 @@
 export interface LocalisationAttributes{
-    scientifique:string,
+    site:string,
     suivi_id:number,
     site_id:number
 }

@@ -22,7 +22,7 @@ label{
 .form-control{
     width: 100%;
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
 }
 .form-control button{
     margin: 1rem .5rem;

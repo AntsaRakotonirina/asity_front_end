@@ -1,11 +1,13 @@
 import { AnimalAttributes } from "./animal.model";
 import { EntityContainer, PaginatedData } from "./entityContainer.model";
+import { LocalisationAttributes } from "./local.model";
 import { SiteAttributes } from "./localisation.model";
 import { NoteAttributes } from "./note.model";
 import { ScientifiqueAttributes } from "./scientifique.model";
 
 export interface SuiviAttributes{
     default_date:Date
+    first_localisation: EntityContainer<LocalisationAttributes>
 }
 
 export interface SuiviSingleAttributes{
