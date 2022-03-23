@@ -1,0 +1,15 @@
+<div class="list">
+    <div class="list-item" *ngFor="let name of _nameList">
+        <div class="grid">
+            <div class="col">
+                {{name.attributes.nom}}
+            </div>
+            <div class="col-fixed">
+                <button style="padding: 0;" class="p-button p-button-text p-button-danger" pButton icon="pi pi-trash" (click)="onDelete(name.id)"></button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="control p-inputgroup">
+    <input type="text" pInputText placeholder="Nouveau Nom" #input><button pButton label="Ajouter" (click)="onCreate({nom:input.value})"></button>
+</div>

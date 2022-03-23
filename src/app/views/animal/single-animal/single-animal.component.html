@@ -1,1 +1,127 @@
-<p>single-animal works!</p>
+<div class="container" *ngIf="_animal">
+    <div class="details">
+        <h1>
+            {{_animal.data.attributes.nom_courrant}}
+        </h1>
+        <table>
+            <tr>
+                <td> <label for="categorie"> Categorie </label></td>
+                <td> : 
+                    <p-autoComplete 
+                        [(ngModel)]="_updateRequest.categorie"
+                        [suggestions]="suggestions"
+                        (completeMethod)="onSearch($event,'categorie')"
+                        inputId="categorie"
+                        [completeOnFocus]="true"
+                        [inputStyle]="{border:'none'}">
+                    </p-autoComplete>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="endemicite">Endemicite</label></td>
+                <td> : 
+                    <p-autoComplete 
+                        [(ngModel)]="_updateRequest.endemicite"
+                        [suggestions]="suggestions"
+                        (completeMethod)="onSearch($event,'endemicite')"
+                        inputId="endemicite"
+                        [completeOnFocus]="true"
+                        [inputStyle]="{border:'none'}">
+                    </p-autoComplete>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="espece">Espece</label></td><td> : 
+                    <p-autoComplete 
+                        [(ngModel)]="_updateRequest.espece"
+                        [suggestions]="suggestions"
+                        (completeMethod)="onSearch($event,'espece')"
+                        inputId="espece"
+                        [completeOnFocus]="true"
+                        [inputStyle]="{border:'none'}">
+                    </p-autoComplete>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="famille">Famille</label></td>
+                <td> : 
+                    <p-autoComplete 
+                        [(ngModel)]="_updateRequest.famille"
+                        [suggestions]="suggestions"
+                        (completeMethod)="onSearch($event,'famille')"
+                        inputId="famille"
+                        [completeOnFocus]="true"
+                        [inputStyle]="{border:'none'}">
+                    </p-autoComplete>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="genre">Genre</label></td>
+                <td> : 
+                    <p-autoComplete 
+                        [(ngModel)]="_updateRequest.genre"
+                        [suggestions]="suggestions"
+                        (completeMethod)="onSearch($event,'genre')"
+                        inputId="genre"
+                        [completeOnFocus]="true"
+                        [inputStyle]="{border:'none'}">
+                    </p-autoComplete>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="guild">Guild</label></td>
+                <td> : 
+                    <p-autoComplete 
+                        [(ngModel)]="_updateRequest.guild"
+                        [suggestions]="suggestions"
+                        (completeMethod)="onSearch($event,'guild')"
+                        inputId="guild"
+                        [completeOnFocus]="true"
+                        [inputStyle]="{border:'none'}">
+                    </p-autoComplete>
+                </td>
+            </tr>
+            <tr *ngFor="let note of attributes.notes">
+                <td>{{note.attributes.titre}}</td> 
+                <td> : <span>{{note.attributes.valeur}}</span> 
+                    <button style="padding: 0;" class="p-button p-button-text p-button-danger" pButton icon="pi pi-trash" (click)="onDeleteNotes(note.id)"></button>
+                </td>
+            </tr>
+            <tr>
+                <td><input type="text" placeholder="titre" pInputText [(ngModel)]="_newNoteTitle"></td>
+                <td> : <input pInputText type="text" placeholder="valeur" [(ngModel)]="_newNoteValue"></td>
+            </tr>
+            <tr>
+                <td colspan="2"><button pButton icon="pi pi-plus" style="width: 100%;" (click)="onAddNotes()"></button></td>
+            </tr>
+        </table>
+    </div>
+    <div class="names">
+        <p-accordion>
+            <p-accordionTab header="Nom Vernaculaires" [selected]="true">
+                <app-create-ver-name [nameList]="this.attributes.nom_vernaculaires" [animalId]="_animal.data.id"></app-create-ver-name>
+            </p-accordionTab>
+            <p-accordionTab header="Nom Communs">
+                <app-create-com-name [nameList]="this.attributes.nom_communs" [animalId]="this._animal.data.id"></app-create-com-name>
+            </p-accordionTab>
+            <p-accordionTab header="Nom Scientifiques">
+                <app-create-sci-name 
+                [nameList]="this.attributes.nom_scientifiques" 
+                [animalId]="this._animal.data.id" 
+                [curentId]="_updateRequest.curent_name_id"
+                (changeCurentName)="onChangeName($event)"></app-create-sci-name>
+            </p-accordionTab>
+        </p-accordion>
+    </div>
+    <div class="update-controls" *ngIf="isAttributesChanged">
+        <button class="p-button p-button-text" pButton label="Annuler" (click)="onReset()"></button>
+        <button class="p-button p-button-outlined" pButton label="Metre a jour" (click)="onUpdate()"></button>
+    </div>
+    <p-dialog [(visible)]="_openAnalyse" [modal]="true" position="top" [draggable]="false" header="Graphe des observation de cette animal">
+        <div class="chart">
+            <app-scatter-chart *ngIf="_analyseData.length > 0" [data]="_analyseData"></app-scatter-chart>
+        </div>
+    </p-dialog>
+    <button (click)="_openAnalyse = true" class="open-analyse" pButton icon="pi pi-chart-bar"></button>
+</div>
+

@@ -10,3 +10,11 @@ body{
     overflow: hidden;
     font-family: Arial, Helvetica, sans-serif;
 }
+
+*::-webkit-scrollbar {
+    width: 7px;
+}
+  
+*::-webkit-scrollbar-thumb {
+  background-color: var(--green-100);
+}

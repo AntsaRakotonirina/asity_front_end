@@ -1,0 +1,35 @@
+:host {
+  height: 100%;
+  width: 100%;
+  display: block;
+  position: relative;
+}
+
+.container {
+  height: 100%;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.container .update-controls {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+}
+
+.container .open-analyse {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 10;
+}
+
+.container .names {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  padding: 1rem;
+}
+/*# sourceMappingURL=single-animal.component.css.map */

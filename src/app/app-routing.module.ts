@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TestFormComponent } from './forms/test-form/test-form.component';
 import { AdminGuard } from './guards/admin.guard';
+import { AnimalUpdateGuard } from './guards/animal-update.guard';
 import { AuthGuard } from './guards/auth.guard';
 import { LoginGuard } from './guards/login.guard';
 import { AnimalComponent } from './views/animal/animal.component';
@@ -27,7 +28,7 @@ const settingRoutes:Routes = [
 const appRoutes: Routes = [
   {path:'',redirectTo:'animal',pathMatch:'full'},
   {path:'animal',component:AnimalComponent},
-  {path:'animal/:id',component:SingleAnimalComponent},
+  {path:'animal/:id',component:SingleAnimalComponent,canDeactivate:[AnimalUpdateGuard]},
   {path:'scientifique',component:ScientifiqueComponent},
   {path:'suivi',component:SuiviComponent},
   {path:'settings',component:SettingComponent,canActivate:[AdminGuard],children:settingRoutes},

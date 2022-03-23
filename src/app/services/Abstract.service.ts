@@ -2,7 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { MessageService } from 'primeng/api';
 import { tap } from 'rxjs';
 import { myEnv } from 'src/environments/myEnv';
-import { EntityContainer, PaginatedData } from '../models/entityContainer.model';
+import { EntityContainer, PaginatedData, SingleEntityContainer } from '../models/entityContainer.model';
+import { DataMessage } from '../models/message.model';
 import { SearchRequest } from '../models/requests/searchRequest.model';
 
 export abstract class AbstractService<T> {
@@ -44,7 +45,7 @@ export abstract class AbstractService<T> {
   }
 
   public update(request:any,id:number){
-    return this.http.put<EntityContainer<T>>(this.url+'/'+id,request)
+    return this.http.put<DataMessage<SingleEntityContainer<T>>>(this.url+'/'+id,request)
     .pipe(tap({
       next:()=>{
         this.messageService.add({severity:'success',summary:"Mis a jour réussi !",detail:this.updateMessage})

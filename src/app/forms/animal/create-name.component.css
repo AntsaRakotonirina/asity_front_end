@@ -1,0 +1,9 @@
+.list{
+    max-height: 30vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.list-item{
+    padding: .2rem 0;
+}

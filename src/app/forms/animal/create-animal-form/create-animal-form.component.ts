@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
-import { animalFormsAttributes } from 'src/app/models/animal.model';
+import { animalAddRequest } from 'src/app/models/requests/animalRequest.model';
 import { SearchRequest } from 'src/app/models/requests/searchRequest.model';
 import { AnimalService } from 'src/app/services/animal.service';
 
@@ -10,7 +10,7 @@ import { AnimalService } from 'src/app/services/animal.service';
   styleUrls: ['../../form.component.css','./create-animal-form.component.css']
 })
 export class CreateAnimalFormComponent implements OnInit {
-  values:animalFormsAttributes={
+  values:animalAddRequest={
     categorie: '',
     endemicite: '',
     espece: '',

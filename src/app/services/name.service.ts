@@ -15,7 +15,7 @@ export class NameService{
     return this.http.get(`${myEnv.urls.name}/${type}/${id}`);
   }
 
-  deletesName(type:string,id:number){
+  deleteName(type:string,id:number){
     return this.http.delete(`${myEnv.urls.name}/${type}/${id}`)
     .pipe(tap({
       next:()=>{this.messageService.add({severity:'success',summary:'Nom supprimer'})},

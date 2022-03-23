@@ -1,0 +1,26 @@
+<div class="list">
+    <div class="list-item" *ngFor="let name of _nameList">
+        <div class="grid">
+            <div class="col-fixed">
+                <p-radioButton name="curentName" [value]="name.id" [(ngModel)]="curentId" (ngModelChange)="onChange()"></p-radioButton>
+            </div>
+            <div class="col">
+                {{name.attributes.nom}}
+            </div>
+            <div class="col">
+                Mis a jour le {{name.attributes.mis_a_jour | date:'dd MMM , y'}}
+            </div>
+            <div class="col-fixed" *ngIf="name.id !== curentId">
+                <button style="padding: 0;" class="p-button p-button-text p-button-danger" pButton icon="pi pi-trash" (click)="onDelete(name.id)"></button>
+            </div>
+            <div class="col-fixed" *ngIf="name.id === curentId">
+                <div style="height: 20px; width: 37px;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="control p-inputgroup">
+    <input type="text" pInputText placeholder="Nouveau Nom" #input>
+    <p-calendar [(ngModel)]="newDate"></p-calendar>
+    <button pButton label="Ajouter" (click)="onCreate({nom:input.value,mis_a_jour:newDate})"></button>
+</div>

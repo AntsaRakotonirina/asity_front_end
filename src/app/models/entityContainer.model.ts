@@ -3,7 +3,9 @@ export interface EntityContainer<T>{
     "type":string,
     "attributes":T
 }
-
+export interface SingleEntityContainer<T>{
+    data:EntityContainer<T>
+}
 export interface PaginatedData<T>{
     'data':T[],
     "links": {

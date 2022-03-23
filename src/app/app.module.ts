@@ -30,6 +30,7 @@ import { HomeComponent } from './views/setting/localisation/home/home.component'
 import { CreateSuiviComponent } from './forms/suivi/create-suivi/create-suivi.component';
 
 import { AutoCompleteModule } from "primeng/autocomplete";
+import { AccordionModule } from "primeng/accordion";
 import { ButtonModule } from "primeng/button";
 import { BreadcrumbModule } from "primeng/breadcrumb";
 import { CheckboxModule } from "primeng/checkbox";
@@ -40,6 +41,7 @@ import { ConfirmDialogModule } from "primeng/confirmdialog";
 import { ConfirmationService, MessageService } from "primeng/api";
 import { DividerModule } from "primeng/divider";
 import { DropdownModule } from "primeng/dropdown";
+import { DialogModule } from "primeng/dialog";
 import { DialogService, DynamicDialogConfig, DynamicDialogModule, DynamicDialogRef } from "primeng/dynamicdialog";
 import { FileUploadModule } from "primeng/fileupload";
 import { InputTextModule } from "primeng/inputtext";
@@ -47,14 +49,21 @@ import { InputSwitchModule } from "primeng/inputswitch";
 import { MenuModule } from "primeng/menu";
 import { PasswordModule } from "primeng/password";
 import { PaginatorModule } from "primeng/paginator";
+import { RadioButtonModule } from "primeng/radiobutton";
 import { SpeedDialModule } from "primeng/speeddial";
 import { SplitterModule } from "primeng/splitter";
+import { SidebarModule } from "primeng/sidebar";
 import { SelectButtonModule } from "primeng/selectbutton";
 import { ScrollPanelModule } from "primeng/scrollpanel";
 import { SkeletonModule } from "primeng/skeleton";
 import { ToastModule } from "primeng/toast";
 import { TabMenuModule } from "primeng/tabmenu";
 import { TableModule } from "primeng/table";
+import { NgChartsModule } from 'ng2-charts';
+import { ScatterChartComponent } from './widgets/scatter-chart/scatter-chart.component';
+import { CreateVerNameComponent } from './forms/animal/create-ver-name/create-ver-name.component';
+import { CreateComNameComponent } from './forms/animal/create-com-name/create-com-name.component';
+import { CreateSciNameComponent } from './forms/animal/create-sci-name/create-sci-name.component';
 
 
 
@@ -66,6 +75,7 @@ const commonModules = [
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
+    NgChartsModule
 ]
 
 //Prime NG's modules
@@ -94,7 +104,11 @@ const  primesModules = [
   InputSwitchModule,
   TableModule,
   SplitterModule,
-  CalendarModule
+  CalendarModule,
+  SidebarModule,
+  DialogModule,
+  AccordionModule,
+  RadioButtonModule
 ]
 
 @NgModule({
@@ -120,7 +134,11 @@ const  primesModules = [
     CreateUserComponent,
     SingleAnimalComponent,
     HomeComponent,
-    CreateSuiviComponent
+    CreateSuiviComponent,
+    ScatterChartComponent,
+    CreateVerNameComponent,
+    CreateComNameComponent,
+    CreateSciNameComponent
   ],
   imports: [
     ...commonModules,

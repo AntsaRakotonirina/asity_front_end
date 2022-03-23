@@ -15,7 +15,8 @@ const URLS = {
     site:baseUrl+'/sites',
     suivi:baseUrl+'/suivis',
     participation:baseUrl+'/participations',
-    localisation:baseUrl+'/localisations'
+    localisation:baseUrl+'/localisations',
+    analyse:baseUrl+'/analyse'
 }
 export const myEnv = {
     urls:URLS,

@@ -1,4 +1,5 @@
 import { EntityContainer } from "./entityContainer.model";
+import { NoteAttributes } from "./note.model";
 
 export interface SingleAnimalAttributes{
     'categorie' : string,
@@ -8,10 +9,13 @@ export interface SingleAnimalAttributes{
     'genre' : string,
     'guild' : string,
     'status' : string,
+    'curent_name_id':number,
+    'nom_courrant':string,
+    'count_type':"nombre"|"abondance"|"presence",
     'nom_vernaculaires' : EntityContainer<NomVernaculaire>[],
     'nom_communs' : EntityContainer<NomCommun>[],
     'nom_scientifiques' : EntityContainer<NomScientifique>[],
-    'notes': EntityContainer<Note>[]
+    'notes': EntityContainer<NoteAttributes>[]
 }
 
 export interface AnimalAttributes{
@@ -38,19 +42,3 @@ export interface NomScientifique{
     'mis_a_jour':Date,
     'animal_id':number
 }
-
-export interface Note{
-    'titre':string,
-    'valeur':string
-}
-
-export interface animalFormsAttributes{
-    'categorie' : string,
-    'endemicite' : string,
-    'espece'  : string,
-    'famille' : string,
-    'genre' : string,
-    'guild' : string,
-    'status' : string,
-    'count_type':string,
-  }

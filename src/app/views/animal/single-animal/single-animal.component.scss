@@ -1,0 +1,26 @@
+:host{
+    height: 100%;
+    width: 100%;
+    display: block;
+    position: relative;
+}
+.container{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    .update-controls{
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+    }
+    .open-analyse{
+        position: absolute;
+        top: 20px;
+        right:20px;
+        z-index: 10;
+    }
+    .names{
+        flex: 1;
+        padding: 1rem;
+    }
+}
