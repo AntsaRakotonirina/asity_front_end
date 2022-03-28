@@ -46,12 +46,14 @@ import { DialogService, DynamicDialogConfig, DynamicDialogModule, DynamicDialogR
 import { FileUploadModule } from "primeng/fileupload";
 import { InputTextModule } from "primeng/inputtext";
 import { InputSwitchModule } from "primeng/inputswitch";
+import { InputNumberModule } from "primeng/inputnumber";
 import { MenuModule } from "primeng/menu";
 import { PasswordModule } from "primeng/password";
 import { PaginatorModule } from "primeng/paginator";
 import { RadioButtonModule } from "primeng/radiobutton";
 import { SpeedDialModule } from "primeng/speeddial";
 import { SplitterModule } from "primeng/splitter";
+import { SplitButtonModule } from "primeng/splitbutton";
 import { SidebarModule } from "primeng/sidebar";
 import { SelectButtonModule } from "primeng/selectbutton";
 import { ScrollPanelModule } from "primeng/scrollpanel";
@@ -64,6 +66,15 @@ import { ScatterChartComponent } from './widgets/scatter-chart/scatter-chart.com
 import { CreateVerNameComponent } from './forms/animal/create-ver-name/create-ver-name.component';
 import { CreateComNameComponent } from './forms/animal/create-com-name/create-com-name.component';
 import { CreateSciNameComponent } from './forms/animal/create-sci-name/create-sci-name.component';
+import { CreateParentComponent } from './forms/localisation/parent/create-parent/create-parent.component';
+import { UpdateParentComponent } from './forms/localisation/parent/update-parent/update-parent.component';
+import { CreateRegionComponent } from './forms/localisation/region/create-region/create-region.component';
+import { UpdateRegionComponent } from './forms/localisation/region/update-region/update-region.component';
+import { CreateSiteComponent } from './forms/localisation/site/create-site/create-site.component';
+import { UpdateSiteComponent } from './forms/localisation/site/update-site/update-site.component';
+import { ParentInfoComponent } from './views/setting/localisation/parent/parent-info/parent-info.component';
+import { ListItemComponent } from './widgets/list-item/list-item.component';
+import { GlobalListComponent } from './views/global-list/global-list.component';
 
 
 
@@ -108,7 +119,9 @@ const  primesModules = [
   SidebarModule,
   DialogModule,
   AccordionModule,
-  RadioButtonModule
+  RadioButtonModule,
+  SplitButtonModule,
+  InputNumberModule
 ]
 
 @NgModule({
@@ -138,7 +151,16 @@ const  primesModules = [
     ScatterChartComponent,
     CreateVerNameComponent,
     CreateComNameComponent,
-    CreateSciNameComponent
+    CreateSciNameComponent,
+    CreateParentComponent,
+    UpdateParentComponent,
+    CreateRegionComponent,
+    UpdateRegionComponent,
+    CreateSiteComponent,
+    UpdateSiteComponent,
+    ParentInfoComponent,
+    ListItemComponent,
+    GlobalListComponent
   ],
   imports: [
     ...commonModules,

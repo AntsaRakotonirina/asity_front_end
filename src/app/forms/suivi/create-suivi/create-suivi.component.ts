@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { DynamicDialogRef } from 'primeng/dynamicdialog';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { SuiviRequest } from 'src/app/models/requests/suiviRequest.model.model';
 import { SuiviService } from 'src/app/services/suivi.service';
 
@@ -9,27 +8,30 @@ import { SuiviService } from 'src/app/services/suivi.service';
   styleUrls: ['./create-suivi.component.css']
 })
 export class CreateSuiviComponent implements OnInit {
+  @Output() close:EventEmitter<void> = new EventEmitter();
   request:SuiviRequest={
     default_date: new Date()
   }
   constructor(
-    private suiviServie: SuiviService,
-    private ref:DynamicDialogRef
+    private suiviServie: SuiviService
   ) { }
 
   ngOnInit(): void {
   }
 
   onSubmit(){
-    this.suiviServie.store(this.request)
+    this.suiviServie.store({data:{default_date:this.transformDate(this.request.default_date)}})
     .subscribe({
       next:()=>{
-        this.ref.close();
+        this.close.emit()
       },
       error:(error)=>{}
     });
   }
+  private transformDate(date:Date):string{
+    return `${date.getDate()}-${date.getMonth()+1}-${date.getFullYear()}`
+  }
   onReset(){
-    this.ref.close();
+    this.close.emit()
   }
 }

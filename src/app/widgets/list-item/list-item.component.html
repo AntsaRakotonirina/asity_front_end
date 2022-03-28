@@ -1,0 +1,10 @@
+<div class="container" [ngClass]="active? 'active':''">
+    <div class="grid">
+        <div class="col">
+            <ng-content #content></ng-content>
+        </div>
+        <div class="col-fixed">
+            <p-splitButton [model]="buttonMenu" (onClick)="onSelect()" [label]="buttonLabel" styleClass="p-button-outlined p-button-sm mr-2 mb-2"></p-splitButton>
+        </div>
+    </div>
+</div>

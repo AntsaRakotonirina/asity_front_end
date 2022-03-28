@@ -1,3 +1,6 @@
+<div class="title">
+    Regions
+</div>
 <div *ngIf="regions" class="list">
     <div *ngFor="let region of regions.data" class="list-item" (click)="onSelect(region.id)">
         {{region.attributes.nom}}

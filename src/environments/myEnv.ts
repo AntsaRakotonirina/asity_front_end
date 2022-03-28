@@ -20,5 +20,6 @@ const URLS = {
 }
 export const myEnv = {
     urls:URLS,
-    tokenKey:'Asity_SI_token'
+    tokenKey:'Asity_SI_token',
+    rowPerPage:15
 }

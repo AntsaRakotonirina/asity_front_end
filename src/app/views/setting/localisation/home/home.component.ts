@@ -30,11 +30,39 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {}
 
   onSelectParent(id:number){
-    this.regionService.index(id).subscribe();
+    this.parentId = id
+    this.regionService.index(this.parentId).subscribe();
     this.siteService.purge();
   }
 
   onSelectRegion(id:number){
-    this.siteService.index(id).subscribe();
+    this.regionId = id;
+    this.siteService.index(this.regionId).subscribe();
+  }
+
+  onDeleteParent(id:number){
+    this.parentService.destroy(id)
+    .subscribe({
+      next:()=>{
+        if(id===this.parentId){
+          this.regionService.purge();
+          this.siteService.purge();
+        }
+      }
+    })
+  }
+
+  onDeleteRegion(id:number){
+    this.regionService.destroy(id)
+    .subscribe({
+      next:()=>{
+        if(id===this.regionId){
+          this.siteService.purge();
+        }
+      }
+    })
+  }
+  onDeleteSite(id:number){
+    this.siteService.destroy(id).subscribe();
   }
 }

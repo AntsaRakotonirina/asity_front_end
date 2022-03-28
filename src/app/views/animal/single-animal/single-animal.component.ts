@@ -136,7 +136,7 @@ export class SingleAnimalComponent implements OnInit {
    * Se declanche quand on met a jour les attribut de l'animal
    */
   onUpdate(){
-    this.animalService.update(this._updateRequest,this._animal.data.id).subscribe({
+    this.animalService.update({data: this._updateRequest,id:this._animal.data.id}).subscribe({
       next:(response)=>{
         this.refreshAnimal();
       },

@@ -1,6 +1,6 @@
 <p-splitter [style]="{height:'100%'}">
     <ng-template pTemplate>
-        <app-parent (select)="onSelectParent($event)"></app-parent>
+        <app-parent (select)="onSelectParent($event)" (delete)="onDeleteParent($event)"></app-parent>
     </ng-template>
     <ng-template pTemplate>
         <app-region *ngIf="regions" (select)="onSelectRegion($event)"></app-region>

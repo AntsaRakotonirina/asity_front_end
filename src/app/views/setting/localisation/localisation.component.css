@@ -4,8 +4,14 @@
     overflow: hidden;
     position: relative;
 }
+.title{
+    font-size: 18pt;
+    text-align: center;
+    font-weight: 700;
+    margin: .5rem 0;
+}
 .list{
-    height: 85%;
+    height: 80%;
     overflow-y: scroll;
 }
 .controll{
@@ -19,15 +25,19 @@
     width: 100%;
 }
 .list-item{
-    padding: 1rem;
+    padding: .5rem;
     margin: .5rem;
     border: solid .5px #f0f0f0;
     border-radius: 5px;
     transition: .3s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
+.list-item.active{
+    border: solid 1px var(--green-500);
+    font-weight: 700;
+    color: var(--green-500);
+}
 .list-item:hover{
     background-color: var(--green-50);
-    border: solid .5px var(--green-500);
     box-shadow: 0px 3px 4px 0px rgb(86 86 86 / 21%);
 }
 .list::-webkit-scrollbar {

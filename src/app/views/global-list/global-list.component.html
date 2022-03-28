@@ -1,0 +1,67 @@
+<div class="search-form">    
+    <ng-content select="[searchIcon]"></ng-content>
+    <div class="form">
+        <ng-content select="[searchBar]"></ng-content>
+    </div>
+    <ng-content select="[rightHeader]"></ng-content>
+</div>
+
+<div class="list" > 
+    <ng-content select="[cards]" *ngIf="!parentState.isLoading"></ng-content>
+    <div class="grid" style="padding: 1rem;" *ngIf="parentState.isLoading">
+        <div class="col-12 md:col-6 lg:col-3">
+            <p-skeleton width="250px" height="126px"></p-skeleton>
+        </div>
+        <div class="col-12 md:col-6 lg:col-3">
+            <p-skeleton width="250px" height="126px"></p-skeleton>
+        </div>
+        <div class="col-12 md:col-6 lg:col-3">
+            <p-skeleton width="250px" height="126px"></p-skeleton>
+        </div>
+        <div class="col-12 md:col-6 lg:col-3">
+            <p-skeleton width="250px" height="126px"></p-skeleton>
+        </div>
+        <div class="col-12 md:col-6 lg:col-3">
+            <p-skeleton width="250px" height="126px"></p-skeleton>
+        </div>
+        <div class="col-12 md:col-6 lg:col-3">
+            <p-skeleton width="250px" height="126px"></p-skeleton>
+        </div>
+        <div class="col-12 md:col-6 lg:col-3">
+            <p-skeleton width="250px" height="126px"></p-skeleton>
+        </div>
+        <div class="col-12 md:col-6 lg:col-3">
+            <p-skeleton width="250px" height="126px"></p-skeleton>
+        </div>
+        <div class="col-12 md:col-6 lg:col-3">
+            <p-skeleton width="250px" height="126px"></p-skeleton>
+        </div>
+        <div class="col-12 md:col-6 lg:col-3">
+            <p-skeleton width="250px" height="126px"></p-skeleton>
+        </div>
+        <div class="col-12 md:col-6 lg:col-3">
+            <p-skeleton width="250px" height="126px"></p-skeleton>
+        </div>
+        <div class="col-12 md:col-6 lg:col-3">
+            <p-skeleton width="250px" height="126px"></p-skeleton>
+        </div>
+        <div class="col-12 md:col-6 lg:col-3">
+            <p-skeleton width="250px" height="126px"></p-skeleton>
+        </div>
+        <div class="col-12 md:col-6 lg:col-3">
+            <p-skeleton width="250px" height="126px"></p-skeleton>
+        </div>
+        <div class="col-12 md:col-6 lg:col-3">
+            <p-skeleton width="250px" height="126px"></p-skeleton>
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+    <div class="dial" *ngIf="authService.userIsAdmin">
+        <p-speedDial [model]="_dialItems" type="quarter-circle" direction="up-left" [radius]="dialRadius"></p-speedDial>
+    </div>
+    <p-paginator *ngIf="!parentState.isSearching" [rows]="15" [totalRecords]="total" (onPageChange)="onPage($event)"></p-paginator>
+</div>
+
+

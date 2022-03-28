@@ -1,87 +1,47 @@
-<div class="search-form">
-    <i class="pi pi-search"></i>
-    <form (submit)="onSearch()">
-        <input type="text" placeholder="Recherche..." [(ngModel)]="_search" [ngModelOptions]="{standalone: true}" required>
-    </form>
-    <p-dropdown 
-    [options]="attributes" 
+<app-global-list
+    [parentState]="_state"
+    [_dialItems]="_dialItems"
+    [total]="animals? animals.meta.total : 15"
+    (pageChange)="onPage($event)"
+    (search)="onSearch()"
+>
+<i class="pi pi-search" searchIcon></i>
+<form (submit)="onSearch()" searchBar>
+    <input type="text" placeholder="Recherche..." [(ngModel)]="_search" [ngModelOptions]="{standalone: true}" required>
+</form>
+
+<div rightHeader>
+    <p-dropdown
+    [options]="_attributes" 
     optionLabel="nom" 
     [(ngModel)]="_selectedAttribute" 
     placeholder="Selection un filtre"
     [ngModelOptions]="{standalone: true}"></p-dropdown>
 </div>
 
-<div class="list" >
-    <div class="grid" style="padding: 1rem;" *ngIf="animals">
-        <div class="col-12 md:col-6 lg:col-3" *ngFor="let animal of animals.data">
-            <app-cards [id]="animal.id" [isEditable]="authService.userIsAdmin || false" 
-            (delete)="onDelete(animal)"
-            (info)="onInfo(animal)" >
-                <div header *ngIf="authService.userIsAdmin">
-                    <p-checkbox name="selected" [value]="animal.id" [(ngModel)]="_selectedIds"></p-checkbox>
-                </div>
-                <div content>
-                    {{animal.attributes.nom_courrant}}
-                </div>
-                <div subtext>
-                    {{animal.attributes.categorie}}
-                </div>
-            </app-cards>
-        </div>
-    </div>
-    <div class="grid" style="padding: 1rem;" *ngIf="!animals">
-        <div class="col-12 md:col-6 lg:col-3">
-            <p-skeleton width="250px" height="126px"></p-skeleton>
-        </div>
-        <div class="col-12 md:col-6 lg:col-3">
-            <p-skeleton width="250px" height="126px"></p-skeleton>
-        </div>
-        <div class="col-12 md:col-6 lg:col-3">
-            <p-skeleton width="250px" height="126px"></p-skeleton>
-        </div>
-        <div class="col-12 md:col-6 lg:col-3">
-            <p-skeleton width="250px" height="126px"></p-skeleton>
-        </div>
-        <div class="col-12 md:col-6 lg:col-3">
-            <p-skeleton width="250px" height="126px"></p-skeleton>
-        </div>
-        <div class="col-12 md:col-6 lg:col-3">
-            <p-skeleton width="250px" height="126px"></p-skeleton>
-        </div>
-        <div class="col-12 md:col-6 lg:col-3">
-            <p-skeleton width="250px" height="126px"></p-skeleton>
-        </div>
-        <div class="col-12 md:col-6 lg:col-3">
-            <p-skeleton width="250px" height="126px"></p-skeleton>
-        </div>
-        <div class="col-12 md:col-6 lg:col-3">
-            <p-skeleton width="250px" height="126px"></p-skeleton>
-        </div>
-        <div class="col-12 md:col-6 lg:col-3">
-            <p-skeleton width="250px" height="126px"></p-skeleton>
-        </div>
-        <div class="col-12 md:col-6 lg:col-3">
-            <p-skeleton width="250px" height="126px"></p-skeleton>
-        </div>
-        <div class="col-12 md:col-6 lg:col-3">
-            <p-skeleton width="250px" height="126px"></p-skeleton>
-        </div>
-        <div class="col-12 md:col-6 lg:col-3">
-            <p-skeleton width="250px" height="126px"></p-skeleton>
-        </div>
-        <div class="col-12 md:col-6 lg:col-3">
-            <p-skeleton width="250px" height="126px"></p-skeleton>
-        </div>
-        <div class="col-12 md:col-6 lg:col-3">
-            <p-skeleton width="250px" height="126px"></p-skeleton>
-        </div>
+<div cards class="grid" style="padding: 1rem;" *ngIf="animals">
+    <div class="col-12 md:col-6 lg:col-3" *ngFor="let animal of animals.data">
+        <app-cards 
+        [id]="animal.id" 
+        [isEditable]="false"
+        [isDeletable]="authService.userIsAdmin || false"
+        (delete)="onDelete(animal.id)"
+        (info)="onInfo(animal)" >
+            <div header *ngIf="authService.userIsAdmin">
+                <p-checkbox name="selected" [value]="animal.id" [(ngModel)]="_selectedIds"></p-checkbox>
+            </div>
+            <div content>
+                {{animal.attributes.nom_courrant}}
+            </div>
+            <div subtext>
+                {{animal.attributes.categorie}}
+            </div>
+        </app-cards>
     </div>
 </div>
 
-<div class="footer">
-    <div class="dial" *ngIf="authService.userIsAdmin">
-        <p-speedDial [model]="_dialItems" type="quarter-circle" direction="up-left" [radius]="120"></p-speedDial>
-    </div>
-    <p-paginator *ngIf="animals" [rows]="15" [totalRecords]="animals.meta.total" (onPageChange)="onPage($event)"></p-paginator>
-</div>
+</app-global-list>
 
+<p-dialog [(visible)]="_isAddFormOpen" [modal]="true" header="ajouter un animal" [draggable]="false">
+    <app-create-animal-form (close)="_isAddFormOpen = false"></app-create-animal-form>
+</p-dialog>

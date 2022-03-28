@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { animalAddRequest } from 'src/app/models/requests/animalRequest.model';
 import { SearchRequest } from 'src/app/models/requests/searchRequest.model';
@@ -10,6 +10,9 @@ import { AnimalService } from 'src/app/services/animal.service';
   styleUrls: ['../../form.component.css','./create-animal-form.component.css']
 })
 export class CreateAnimalFormComponent implements OnInit {
+
+  @Output() close:EventEmitter<void> = new EventEmitter<void>();
+
   values:animalAddRequest={
     categorie: '',
     endemicite: '',
@@ -36,8 +39,7 @@ export class CreateAnimalFormComponent implements OnInit {
   suggestions:string[]=[];
 
   constructor(
-    private animalService:AnimalService,
-    private ref:DynamicDialogRef
+    private animalService:AnimalService
   ) { }
   
   ngOnInit(): void {
@@ -69,17 +71,27 @@ export class CreateAnimalFormComponent implements OnInit {
   }
 
   onSubmit(){
-    this.animalService.store(this.values)
+    this.animalService.store({data:this.values})
     .subscribe({
       next:()=>{
-        this.ref.close();
+        this.onReset();
       },
       error:(error)=>{}
     });
   }
 
   onReset(){
-    this.ref.close();
+    this.values = {
+      categorie: '',
+      endemicite: '',
+      espece: '',
+      famille: '',
+      genre: '',
+      guild: '',
+      status: 'EN',
+      count_type: 'nombre'
+    }
+    this.close.emit();
   }
 }
 

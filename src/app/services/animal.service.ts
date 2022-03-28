@@ -4,25 +4,21 @@ import { MessageService } from 'primeng/api';
 import { tap } from 'rxjs';
 import { myEnv } from 'src/environments/myEnv';
 import { AnimalAttributes, SingleAnimalAttributes } from '../models/animal.model';
-import { EntityContainer, PaginatedData, SingleEntityContainer } from '../models/entityContainer.model';
+import { EntityContainer, SingleEntityContainer } from '../models/entityContainer.model';
 import { DataMessage } from '../models/message.model';
 import { ComNameAttributes, SciNameAttributes, VerNameAttributes } from '../models/name.model';
 import { NoteAttributes } from '../models/note.model';
 import { animalUpdateRequest } from '../models/requests/animalRequest.model';
 import { SearchRequest } from '../models/requests/searchRequest.model';
+import { AbstractAPIService } from '../share/class/abstractAPI.service';
 import { AbstractService } from './Abstract.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AnimalService extends AbstractService<AnimalAttributes>{
-  public override url: string = myEnv.urls.animal;
-  protected override defaultAttribute: string = 'nom';
-
-  protected override valueName:string = 'Animal';
-  protected override updateMessage: string = "L'animal a ete mis a jour";
-  protected override deleteMessage: string = "L'animal a ete supprimer";
-  protected override storeMessage: string = "L'animal a ete crée";
+export class AnimalService extends AbstractAPIService<AnimalAttributes,SingleAnimalAttributes>{
+  public override baseURL: string = myEnv.urls.animal;
+  protected override type: string = 'animal';
   
   public isEdit:boolean=false // Flag pour savoir si un animal est en cour d'edit ou non
 
@@ -39,20 +35,6 @@ export class AnimalService extends AbstractService<AnimalAttributes>{
 
   public autoComplete(request:SearchRequest ){
     return this.http.get<{value:string}[]>(myEnv.urls.autocomplete+'/animaux?attribute='+request.attribute+"&search="+request.search);
-  }
-  
-  public show(id:number){
-    return this.http.get<SingleEntityContainer<SingleAnimalAttributes>>(myEnv.urls.animal+'/'+id);
-  }
-
-  public override update(request:animalUpdateRequest,id:number){
-    return this.http.put<DataMessage<SingleEntityContainer<SingleAnimalAttributes>>>(this.url+'/'+id,request)
-    .pipe(tap({
-      next:()=>{
-        this.messageService.add({severity:'success',summary:"Mis a jour réussi !",detail:this.updateMessage})
-      },
-      error:()=>{}
-    }));
   }
 
   public addVername(data:any,id:number){

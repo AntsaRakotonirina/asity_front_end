@@ -1,18 +1,14 @@
-.search-form {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  padding-right: 1rem;
-}
-
-.search-form form {
+:host {
+  display: block;
+  height: 100%;
   width: 100%;
 }
 
-.search-form input {
+form {
+  width: 100%;
+}
+
+input {
   border: none;
   height: 50px;
   margin-left: 1rem;
@@ -21,49 +17,13 @@
   font-size: 12pt;
 }
 
-.list {
-  padding: 1rem 3rem;
-  height: 78vh;
-  overflow-y: scroll;
-  overflow-x: hidden;
-}
-
-.list::-webkit-scrollbar {
-  width: 7px;
-}
-
-.list::-webkit-scrollbar-thumb {
-  background-color: var(--green-100);
-}
-
-.list-item {
-  margin: 1rem 0;
-  padding: 1em;
-  border-radius: 5px;
-  border: solid .5px #f0f0f0;
-  -webkit-transition: .3s;
-  transition: .3s;
-}
-
-.list-item .spec, .list-item .email, .list-item .phone {
-  font-size: 10pt;
-  color: var(--gray-500);
-}
-
-.list-item:hover {
-  background-color: var(--green-50);
-  border: solid 0.5px var(--green-500);
-  -webkit-box-shadow: 0px 3px 4px 0px #56565636;
-          box-shadow: 0px 3px 4px 0px #56565636;
-}
-
-.footer {
-  position: relative;
-}
-
-.dial {
-  position: absolute;
-  right: 97px;
-  bottom: 70px;
+.search-form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding-right: 1rem;
 }
 /*# sourceMappingURL=scientifique.component.css.map */

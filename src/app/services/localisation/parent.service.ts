@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { Observable, tap } from 'rxjs';
-import { EntityContainer, PaginatedData } from 'src/app/models/entityContainer.model';
+import { EntityContainer, PaginatedData, SingleEntityContainer } from 'src/app/models/entityContainer.model';
 import { ParentAttributes, RegionAttributes } from 'src/app/models/localisation.model';
 import { DataMessage, MessageModel } from 'src/app/models/message.model';
 import { ParentRequest } from 'src/app/models/requests/localisationRequest.model';
@@ -30,7 +30,10 @@ export class ParentService implements RestInterface{
   public store(payload:ParentRequest): Observable<DataMessage<EntityContainer<ParentAttributes>>> {
     return this.http.post<DataMessage<EntityContainer<ParentAttributes>>>(myEnv.urls.parent,payload)
     .pipe(tap({
-      next:()=>{this.messageService.add({severity:'success',summary:'Site Parent crée'})},
+      next:(response)=>{
+        this.messageService.add({severity:'success',summary:'Site Parent crée'})
+        this._data?.data.push(response.data);
+      },
       error:(error)=>{this.messageService.add({severity:'error',summary:'Erreur de creation',detail:'Impossible de crée ce site veuillez réessayer ultérieurement ou rechargez la page'})}
     }));
   }
@@ -38,19 +41,31 @@ export class ParentService implements RestInterface{
   public update(data: ParentRequest, id: number): Observable<DataMessage<EntityContainer<ParentAttributes>>> {
     return this.http.put<DataMessage<EntityContainer<ParentAttributes>>>(myEnv.urls.parent+'/'+id,data)
     .pipe(tap({
-      next:()=>{this.messageService.add({severity:'success',summary:'Site Parent mis a jour'})},
+      next:(response)=>{
+        this.messageService.add({severity:'success',summary:'Site Parent mis a jour'})
+        const index = this._data?.data.findIndex((value)=>value.id === id) as number;
+        if(index >= 0 && this._data){
+          this._data.data[index] = response.data;
+        }
+      },
       error:(error)=>{this.messageService.add({severity:'error',summary:'Erreur de modification',detail:'Impossible de modifier ce site veuillez réessayer ultérieurement ou rechargez la page'})}
     }));
   }
 
-  public show(id: number): Observable<EntityContainer<ParentAttributes>> {
-    return this.http.get<EntityContainer<ParentAttributes>>(myEnv.urls.parent+'/'+id);
+  public show(id: number): Observable<SingleEntityContainer<ParentAttributes>> {
+    return this.http.get<SingleEntityContainer<ParentAttributes>>(myEnv.urls.parent+'/'+id);
   }
 
   public destroy(id: number): Observable<unknown> {
     return this.http.delete<MessageModel>(myEnv.urls.parent+'/'+id)
     .pipe(tap({
-      next:()=>{this.messageService.add({severity:'success',summary:'Site Parent supprimer'})},
+      next:()=>{
+        this.messageService.add({severity:'success',summary:'Site Parent supprimer'})
+        const index = this._data?.data.findIndex((value)=>value.id === id) as number;
+        if(index >= 0){
+          this._data?.data.splice(index,1);
+        }
+      },
       error:(error)=>{this.messageService.add({severity:'error',summary:'Erreur de suppression',detail:'Impossible de supprimer ce site veuillez réessayer ultérieurement ou rechargez la page'})}
     }));
   }

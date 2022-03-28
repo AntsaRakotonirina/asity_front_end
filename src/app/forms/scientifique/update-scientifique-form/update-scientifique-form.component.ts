@@ -28,7 +28,7 @@ export class UpdateScientifiqueFormComponent implements OnInit {
   }
 
   onSubmit(){
-    this.scientifiqueService.update(this.values,this.config.data.scientifique.id)
+    this.scientifiqueService.update({data:this.values,id:this.config.data.scientifique.id})
     .subscribe({
       next:()=>{this.ref.close();},
       error:(error)=>{}

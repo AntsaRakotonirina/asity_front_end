@@ -5,7 +5,7 @@ import { ParentComponent } from './parent.component';
 describe('ParentComponent', () => {
   let component: ParentComponent;
   let fixture: ComponentFixture<ParentComponent>;
-
+  
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ ParentComponent ]

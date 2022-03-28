@@ -1,8 +1,22 @@
-<div *ngIf="parents" class="list">
-    <div *ngFor="let parent of parents.data" class="list-item" (click)="onSelect(parent.id)">
-        {{parent.attributes.aireProteger}}
-    </div>
+<div class="title">
+    Sites Parents
 </div>
+<div *ngIf="parents" class="list">
+    <app-list-item 
+        *ngFor="let parent of parents.data" 
+        buttonLabel="Region" 
+        (select)="onSelect(parent.id)"
+        (delete)="onDelete(parent.id)"
+        (update)="onUpdate(parent)"
+        (info)="onInfo(parent)"
+        [active]="parent.id === parentId"
+    >
+        <div content>{{parent.attributes.aireProteger}}</div>
+    </app-list-item>
+</div>
+<p-dialog [(visible)]="_createFormOpen" [modal]="true" header="Ajouter un site parent">
+    <app-create-parent (close)="_createFormOpen = false"></app-create-parent>
+</p-dialog>
 <div class="controll">
-    <button class="p-button p-button-outlined" pButton label="Ajouter"></button>
+    <button class="p-button p-button-outlined" pButton label="Ajouter" (click)="_createFormOpen = true"></button>
 </div>

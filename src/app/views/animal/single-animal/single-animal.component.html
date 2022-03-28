@@ -119,7 +119,7 @@
     </div>
     <p-dialog [(visible)]="_openAnalyse" [modal]="true" position="top" [draggable]="false" header="Graphe des observation de cette animal">
         <div class="chart">
-            <app-scatter-chart *ngIf="_analyseData.length > 0" [data]="_analyseData"></app-scatter-chart>
+            <app-scatter-chart *ngIf="_analyseData.length > 0" [type]="_animal.data.attributes.count_type === 'presence' ? 'line':'scatter'" [data]="_analyseData"></app-scatter-chart>
         </div>
     </p-dialog>
     <button (click)="_openAnalyse = true" class="open-analyse" pButton icon="pi pi-chart-bar"></button>
