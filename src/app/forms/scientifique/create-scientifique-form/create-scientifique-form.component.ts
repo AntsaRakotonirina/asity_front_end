@@ -1,39 +1,36 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { DynamicDialogRef } from 'primeng/dynamicdialog';
+import { Component, OnInit } from '@angular/core';
 import { ScientifiqueAttributes } from 'src/app/models/scientifique.model';
 import { ScientifiqueService } from 'src/app/services/scientifique.service';
+import { AbstractFormComponent } from 'src/app/share/class/abstactForm.component';
 
 @Component({
   selector: 'app-create-scientifique-form',
   templateUrl: './create-scientifique-form.component.html',
   styleUrls: ['./create-scientifique-form.component.css']
 })
-export class CreateScientifiqueFormComponent implements OnInit {
-  @Output() close:EventEmitter<void> = new EventEmitter<void>();
-  values:ScientifiqueAttributes={
+export class CreateScientifiqueFormComponent extends AbstractFormComponent implements OnInit {
+  
+  
+  override values:ScientifiqueAttributes={
     nom: '',
     prenom: '',
     specialite: '',
     telephone: '',
     email: ''
   }
+
   constructor(
     private scientifiqueService:ScientifiqueService,
-    private ref:DynamicDialogRef
-  ) { }
+  ) {
+    super(scientifiqueService);
+  }
+
+  get formValid(): boolean { throw true; }
 
   ngOnInit(): void {
   }
 
-  onSubmit(){
-    this.scientifiqueService.store({data:this.values})
-    .subscribe({
-      next:()=>{this.onReset()},
-      error:(error)=>{}
-    });
-  }
-
-  onReset(){
+  override onReset(){
     this.values = {
       nom: '',
       prenom: '',

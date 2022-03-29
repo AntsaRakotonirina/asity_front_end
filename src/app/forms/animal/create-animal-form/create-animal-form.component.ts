@@ -1,19 +1,18 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { animalAddRequest } from 'src/app/models/requests/animalRequest.model';
 import { SearchRequest } from 'src/app/models/requests/searchRequest.model';
 import { AnimalService } from 'src/app/services/animal.service';
+import { AbstractFormComponent } from 'src/app/share/class/abstactForm.component';
 
 @Component({
   selector: 'app-create-animal-form',
   templateUrl: './create-animal-form.component.html',
   styleUrls: ['../../form.component.css','./create-animal-form.component.css']
 })
-export class CreateAnimalFormComponent implements OnInit {
+export class CreateAnimalFormComponent extends AbstractFormComponent implements OnInit {
 
-  @Output() close:EventEmitter<void> = new EventEmitter<void>();
-
-  values:animalAddRequest={
+  
+  override values:animalAddRequest={
     categorie: '',
     endemicite: '',
     espece: '',
@@ -40,7 +39,9 @@ export class CreateAnimalFormComponent implements OnInit {
 
   constructor(
     private animalService:AnimalService
-  ) { }
+  ) { 
+    super(animalService);
+  }
   
   ngOnInit(): void {
   }
@@ -70,17 +71,7 @@ export class CreateAnimalFormComponent implements OnInit {
     })
   }
 
-  onSubmit(){
-    this.animalService.store({data:this.values})
-    .subscribe({
-      next:()=>{
-        this.onReset();
-      },
-      error:(error)=>{}
-    });
-  }
-
-  onReset(){
+  override onReset(){
     this.values = {
       categorie: '',
       endemicite: '',

@@ -1,5 +1,5 @@
 <div class="calendar">
-    <p-calendar [(ngModel)]="request.default_date" [inline]="true" [style]="{width:'600px'}" [showWeek]="true"></p-calendar>
+    <p-calendar [(ngModel)]="values.default_date" [inline]="true" [style]="{width:'600px'}" [showWeek]="true"></p-calendar>
 </div>
 <button class="p-button p-button-outlined" pButton label="Ajouter !" (click)="onSubmit()"></button>
 <button class="p-button p-button-text" pButton label="Annuler" (click)="onReset()"></button>
