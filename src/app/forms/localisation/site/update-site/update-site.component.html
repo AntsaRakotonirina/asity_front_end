@@ -1,1 +1,35 @@
-<p>update-site works!</p>
+<div class="form">
+    <div class="form-section">
+        <label for="name">Nom du site</label>
+        <input type="text" pInputText id="name" [(ngModel)]="_request.nom" placeholder="eg: Lac Kinkony">
+    </div>
+    <div class="form-section">
+        <label for="lat">Latitude</label>
+        <p-inputNumber 
+            [(ngModel)]="_request.latitude" 
+            [minFractionDigits]="2" 
+            [maxFractionDigits]="20" 
+            inputId="lat" 
+            [min]="-90" 
+            [max]="90"
+            [showButtons]="true"
+        ></p-inputNumber>
+    </div>
+    <div class="form-section">
+        <label for="lon">Longitude</label>
+        <p-inputNumber 
+            [(ngModel)]="_request.longitude" 
+            [minFractionDigits]="2" 
+            [maxFractionDigits]="20" 
+            inputId="lon"
+            [min]="-180" 
+            [max]="180"
+            [showButtons]="true"
+        ></p-inputNumber>
+    </div>
+    <div class="form-section form-controll">
+        <button pButton label="Annuler" class="p-button p-button-text" (click)="onReset()"></button>
+        <button pButton label="Modifier" class="p-button p-button-outlined" (click)="onUpdate()" [disabled]="!formValid"></button>
+    </div>
+</div>
+

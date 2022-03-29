@@ -1,11 +1,26 @@
-<div class="title">
-    Regions
-</div>
-<div *ngIf="regions" class="list">
-    <div *ngFor="let region of regions.data" class="list-item" (click)="onSelect(region.id)">
-        {{region.attributes.nom}}
+<app-setting-list
+(create)="_isAddFormOpen = true"
+[parentState]="_state"
+[total]="regions ? regions.meta.total : 15"
+(pageChange)="onPage($event)"
+>
+    <span title>
+        Regions
+    </span>
+    <div list>
+        <app-list-item 
+            *ngFor="let region of regions?.data" 
+            buttonLabel="Sites" 
+            (update)="onUpdate(region)"
+            (select)="onSelect(region.id)"
+            (delete)="onDelete(region.id)"
+            [active]="region.id === regionId"
+            [haveInfo]="false"
+        >
+            <div content>{{region.attributes.nom}}</div>
+        </app-list-item>
     </div>
-</div>
-<div class="controll">
-    <button class="p-button p-button-outlined" pButton label="Ajouter"></button>
-</div>
+</app-setting-list>
+<p-dialog [(visible)]="_isAddFormOpen" [modal]="true" header="Ajouter une region">
+    <app-create-region (close)="_isAddFormOpen = false"></app-create-region>
+</p-dialog>

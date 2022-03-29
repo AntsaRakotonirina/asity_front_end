@@ -3,7 +3,7 @@
         <app-parent (select)="onSelectParent($event)" (delete)="onDeleteParent($event)"></app-parent>
     </ng-template>
     <ng-template pTemplate>
-        <app-region *ngIf="regions" (select)="onSelectRegion($event)"></app-region>
+        <app-region *ngIf="regions" (select)="onSelectRegion($event)" (delete)="onDeleteRegion($event)"></app-region>
     </ng-template>
     <ng-template pTemplate>
         <app-site *ngIf="sites"></app-site>

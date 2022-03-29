@@ -1,58 +1,42 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MessageService } from 'primeng/api';
-import { Observable, tap } from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
 import { EntityContainer, PaginatedData } from 'src/app/models/entityContainer.model';
 import { SiteAttributes } from 'src/app/models/localisation.model';
-import { DataMessage, MessageModel } from 'src/app/models/message.model';
-import { SiteRequest } from 'src/app/models/requests/localisationRequest.model';
+import { AbstractAPIService } from 'src/app/share/class/abstractAPI.service';
+import { IndexRequest } from 'src/app/share/interfaces/CrudInterface';
 import { myEnv } from 'src/environments/myEnv';
-import { RestInterface } from '../restInterface.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class SiteService implements RestInterface {
-  private  _data:PaginatedData<EntityContainer<SiteAttributes>>|null=null;
-  constructor(private http:HttpClient,private messageService:MessageService) { }
-  
+export class SiteService extends AbstractAPIService<SiteAttributes,SiteAttributes> {
+  public override baseURL: string = myEnv.urls.site;
+  public override parentURL: string | null = myEnv.urls.region;
+  public override slug:string = 'sites';
+  public regionId:number = NaN;
+
+  constructor(
+    protected override http:HttpClient,
+    protected override messageService:MessageService) {
+    super(http,messageService)
+  }
+
   get sites(){
     return this._data;
   }
 
-  public index(id:number){
-    return this.http.get<PaginatedData<EntityContainer<SiteAttributes>>>(`${myEnv.urls.region}/${id}/sites`)
-    .pipe(tap({
-      next:(reponse)=>{this._data = reponse}
-    }));
-  }
-
-  public store(payload:SiteRequest): Observable<DataMessage<EntityContainer<SiteAttributes>>> {
-    return this.http.post<DataMessage<EntityContainer<SiteAttributes>>>(myEnv.urls.site,payload)
-    .pipe(tap({
-      next:()=>{this.messageService.add({severity:'success',summary:'Site crée'})},
-      error:(error)=>{this.messageService.add({severity:'error',summary:'Erreur de creation',detail:'Impossible de crée ce site veuillez réessayer ultérieurement ou rechargez la page'})}
-    }));
-  }
-
-  public update(data: SiteRequest , id: number): Observable<DataMessage<EntityContainer<SiteAttributes>>> {
-    return this.http.put<DataMessage<EntityContainer<SiteAttributes>>>(myEnv.urls.site+'/'+id,data)
-    .pipe(tap({
-      next:()=>{this.messageService.add({severity:'success',summary:'Site Mis a jour'})},
-      error:(error)=>{this.messageService.add({severity:'error',summary:'Erreur de creation',detail:'Impossible de metre a jour ce site veuillez réessayer ultérieurement ou rechargez la page'})}
-    }));
-  }
-
-  public show(id: number): Observable<unknown> {
-    return this.http.get<EntityContainer<SiteAttributes>>(myEnv.urls.site+'/'+id);
-  }
-
-  public destroy(id: number): Observable<MessageModel> {
-    return this.http.delete<MessageModel>(myEnv.urls.site+'/'+id)
-    .pipe(tap({
-      next:()=>{this.messageService.add({severity:'success',summary:'Site Parent supprimer'})},
-      error:(error)=>{this.messageService.add({severity:'error',summary:'Erreur de suppression',detail:'Impossible de supprimer cette region veuillez réessayer ultérieurement ou rechargez la page'})}
-    }));
+  /**
+   * On sauvegarde la parentId au moment ou on obtien une reponse
+   * Methode qui entour le methode index de @AbstractAPIService pour permetre ajouter une fonctionalier de watcher sur le parent
+   * A tout moment @parentId conservera l'identifiant de son parent
+   */
+   public override index(request:IndexRequest){
+    return super.index(request).pipe(map((reponse)=>{
+      this.regionId = request.parentId as number;
+      return reponse;
+    }))
   }
 
   public purge(){

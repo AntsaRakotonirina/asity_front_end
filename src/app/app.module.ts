@@ -75,6 +75,8 @@ import { UpdateSiteComponent } from './forms/localisation/site/update-site/updat
 import { ParentInfoComponent } from './views/setting/localisation/parent/parent-info/parent-info.component';
 import { ListItemComponent } from './widgets/list-item/list-item.component';
 import { GlobalListComponent } from './views/global-list/global-list.component';
+import { SettingListComponent } from './widgets/setting-list/setting-list.component';
+import { SiteInfoComponent } from './views/setting/localisation/site/site-info/site-info.component';
 
 
 
@@ -160,7 +162,9 @@ const  primesModules = [
     UpdateSiteComponent,
     ParentInfoComponent,
     ListItemComponent,
-    GlobalListComponent
+    GlobalListComponent,
+    SettingListComponent,
+    SiteInfoComponent
   ],
   imports: [
     ...commonModules,

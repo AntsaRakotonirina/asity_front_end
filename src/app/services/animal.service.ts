@@ -4,14 +4,12 @@ import { MessageService } from 'primeng/api';
 import { tap } from 'rxjs';
 import { myEnv } from 'src/environments/myEnv';
 import { AnimalAttributes, SingleAnimalAttributes } from '../models/animal.model';
-import { EntityContainer, SingleEntityContainer } from '../models/entityContainer.model';
+import { EntityContainer } from '../models/entityContainer.model';
 import { DataMessage } from '../models/message.model';
 import { ComNameAttributes, SciNameAttributes, VerNameAttributes } from '../models/name.model';
 import { NoteAttributes } from '../models/note.model';
-import { animalUpdateRequest } from '../models/requests/animalRequest.model';
 import { SearchRequest } from '../models/requests/searchRequest.model';
 import { AbstractAPIService } from '../share/class/abstractAPI.service';
-import { AbstractService } from './Abstract.service';
 
 @Injectable({
   providedIn: 'root'

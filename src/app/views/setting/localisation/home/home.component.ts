@@ -31,13 +31,13 @@ export class HomeComponent implements OnInit {
 
   onSelectParent(id:number){
     this.parentId = id
-    this.regionService.index(this.parentId).subscribe();
+    this.regionService.index({parentId: this.parentId}).subscribe();
     this.siteService.purge();
   }
 
   onSelectRegion(id:number){
     this.regionId = id;
-    this.siteService.index(this.regionId).subscribe();
+    this.siteService.index({parentId: this.regionId}).subscribe();
   }
 
   onDeleteParent(id:number){
@@ -62,6 +62,7 @@ export class HomeComponent implements OnInit {
       }
     })
   }
+  
   onDeleteSite(id:number){
     this.siteService.destroy(id).subscribe();
   }

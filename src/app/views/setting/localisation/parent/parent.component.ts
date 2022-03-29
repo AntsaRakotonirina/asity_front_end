@@ -4,8 +4,9 @@ import { DialogService } from 'primeng/dynamicdialog';
 import { UpdateParentComponent } from 'src/app/forms/localisation/parent/update-parent/update-parent.component';
 import { EntityContainer } from 'src/app/models/entityContainer.model';
 import { ParentAttributes } from 'src/app/models/localisation.model';
-import { ParentRequest } from 'src/app/models/requests/localisationRequest.model';
+import { AuthService } from 'src/app/services/auth.service';
 import { ParentService } from 'src/app/services/localisation/parent.service';
+import { AbstractAPIComponent } from 'src/app/share/class/abstract.component';
 import { ParentInfoComponent } from './parent-info/parent-info.component';
 
 
@@ -14,42 +15,26 @@ import { ParentInfoComponent } from './parent-info/parent-info.component';
   templateUrl: './parent.component.html',
   styleUrls: ['../localisation.component.css','./parent.component.css']
 })
-export class ParentComponent implements OnInit {
-
-  _createFormOpen:boolean=false;
-
-  request: ParentRequest={
-    aireProteger: '',
-    pays: '',
-    abreviation: '',
-    latitude: 0,
-    longitude: 0
-  };
-
+export class ParentComponent extends AbstractAPIComponent<ParentAttributes,ParentAttributes> implements OnInit {
   parentId:number = -1;
   @Output() select:EventEmitter<number> = new EventEmitter<number>();
   @Output() delete:EventEmitter<number> = new EventEmitter<number>();
 
   constructor(
     private parentService:ParentService,
-    private confirmationService:ConfirmationService,
-    private dialogService:DialogService
-  ) { }
+    public override authService:AuthService,
+    protected override confirmationService:ConfirmationService,
+    private dialogService:DialogService,
+  ) {
+    super(parentService,confirmationService,authService);
+  }
 
   get parents(){
     return this.parentService.parents;
   }
   
   ngOnInit(): void {
-    this.init();
-  }
-
-  init(){
-    this.index()
-  }
-
-  index(){
-    this.parentService.index().subscribe();
+    this.index();
   }
 
   onSelect(id:number){
@@ -71,7 +56,7 @@ export class ParentComponent implements OnInit {
     })
   }
 
-  onDelete(id:number){
+  override onDelete(id:number){
     this.confirmationService.confirm({
       header:"Supprimer le site parent ?",
       message:"Supprimer ce parent entraine la suppression des regions et des sites qu'il contient ",

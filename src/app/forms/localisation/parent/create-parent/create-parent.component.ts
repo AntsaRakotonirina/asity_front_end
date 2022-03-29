@@ -5,7 +5,7 @@ import { ParentService } from 'src/app/services/localisation/parent.service';
 @Component({
   selector: 'app-create-parent',
   templateUrl: './create-parent.component.html',
-  styleUrls: ['./create-parent.component.css']
+  styleUrls: ['../../form.component.css','./create-parent.component.css']
 })
 export class CreateParentComponent implements OnInit {
 
@@ -53,7 +53,7 @@ export class CreateParentComponent implements OnInit {
   }
 
   onCreate(){
-    this.parentService.store(this._request).subscribe({
+    this.parentService.store({data:this._request}).subscribe({
       next:()=>{this.close.emit()}
     });
   }

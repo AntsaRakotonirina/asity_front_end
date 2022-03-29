@@ -1,13 +1,14 @@
 import { HttpClient } from "@angular/common/http";
 import { MessageService } from "primeng/api";
-import { map, Observable, of, tap } from "rxjs";
+import { map, Observable, tap } from "rxjs";
 import { EntityContainer, PaginatedData, SingleEntityContainer } from "src/app/models/entityContainer.model";
-import { DataMessage } from "src/app/models/message.model";
+import { DataMessage, MessageModel } from "src/app/models/message.model";
 import { myEnv } from "src/environments/myEnv";
 import { CrudInterface, IndexRequest, StoreRequest, UpdateRequest } from "../interfaces/CrudInterface";
 
 export abstract class AbstractAPIService<T,S> implements CrudInterface{
-    _data!:PaginatedData<EntityContainer<T>>;
+    _data:PaginatedData<EntityContainer<T>>|null=null;
+    slug:string = '';
     baseURL:string=myEnv.urls.base;
     parentURL:string|null=null;
     protected type:string="Entiter";
@@ -41,7 +42,7 @@ export abstract class AbstractAPIService<T,S> implements CrudInterface{
     generateUrl(request:IndexRequest){
         let response = "";
         if(this.parentURL && request.parentId){
-            response = `${this.parentURL}/${request.parentId}?`
+            response = `${this.parentURL}/${request.parentId}/${this.slug}?`
         }else{
             response = `${this.baseURL}?`
         }
@@ -81,8 +82,9 @@ export abstract class AbstractAPIService<T,S> implements CrudInterface{
         .pipe(
             tap(this.responseHandler('update')),
             map((reponse)=>{
-                const index = this._data.data.findIndex((value)=>value.id === request.id)
-                if(index >= 0){
+                const index = this._data?.data.findIndex((value)=>value.id === request.id)
+                console.log(index !== undefined && index >= 0 && this._data !== null);
+                if(index !== undefined && index >= 0 && this._data){
                     this._data.data[index]=reponse.data;
                 }
                 return reponse;
@@ -90,13 +92,13 @@ export abstract class AbstractAPIService<T,S> implements CrudInterface{
         );
     }
     
-    destroy(id: number): Observable<DataMessage<EntityContainer<T>>> {
-        return this.http.delete<DataMessage<EntityContainer<T>>>(`${this.baseURL}/${id}`)
+    destroy(id: number): Observable<MessageModel> {
+        return this.http.delete<MessageModel>(`${this.baseURL}/${id}`)
         .pipe(
             tap(this.responseHandler('delete')),
             map((reponse)=>{
-                const index = this._data.data.findIndex((value)=>value.id === id)
-                if(index >= 0){
+                const index = this._data?.data.findIndex((value)=>value.id === id)
+                if(index && index >= 0 && this._data){
                     this._data.data.splice(index,1);
                 }
                 return reponse;

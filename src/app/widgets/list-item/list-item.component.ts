@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { MenuItem } from 'primeng/api';
 
 @Component({
   selector: 'app-list-item',
@@ -8,10 +7,13 @@ import { MenuItem } from 'primeng/api';
 })
 export class ListItemComponent implements OnInit {
 
-  buttonMenu:MenuItem[]=[];
 
   @Input() buttonLabel:string = "label";
   @Input() active:boolean = false;
+
+  @Input() haveInfo:boolean = true;
+  @Input() haveEdit:boolean = true;
+  @Input() haveDelete:boolean = true;
 
   @Output() select:EventEmitter<void> = new EventEmitter<void>();
   @Output() info:EventEmitter<void>   = new EventEmitter<void>();
@@ -21,23 +23,6 @@ export class ListItemComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.buttonMenu = [
-      {
-        label:"Information",
-        icon:"pi pi-fw pi-info-circle",
-        command: ()=>{this.onInfo()}
-      },
-      {
-        label:"Modifier",
-        icon:"pi pi-fw pi-pencil",
-        command: ()=>{this.onUpdate()}
-      },
-      {
-        label:"Supprimer",
-        icon:"pi pi-fw pi-trash",
-        command: ()=>{this.onDelete()}
-      }
-    ]
   }
 
   onSelect() { this.select.emit(); }

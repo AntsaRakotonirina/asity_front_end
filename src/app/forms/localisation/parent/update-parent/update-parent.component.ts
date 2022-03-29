@@ -8,7 +8,7 @@ import { ParentService } from 'src/app/services/localisation/parent.service';
 @Component({
   selector: 'app-update-parent',
   templateUrl: './update-parent.component.html',
-  styleUrls: ['./update-parent.component.css']
+  styleUrls: ['../../form.component.css','./update-parent.component.css']
 })
 export class UpdateParentComponent implements OnInit {
   _parent!:EntityContainer<ParentAttributes>
@@ -58,7 +58,7 @@ export class UpdateParentComponent implements OnInit {
   }
 
   onUpdate(){
-    this.parentService.update(this._request,this._parent.id).subscribe({
+    this.parentService.update({data:this._request,id:this._parent.id}).subscribe({
       next:()=>{this.ref.close()}
     });
   }

@@ -1,5 +1,5 @@
 import { ConfirmationService, MenuItem } from "primeng/api";
-import { Observable, Observer, tap } from "rxjs";
+import { Observable, tap } from "rxjs";
 import { EntityContainer, PaginatedData } from "src/app/models/entityContainer.model";
 import { AuthService } from "src/app/services/auth.service";
 import { ComponentOperationsInterface } from "../interfaces/ComponentOperationsInterface";
@@ -11,14 +11,15 @@ export abstract class AbstractAPIComponent<T,S> implements ComponentOperationsIn
     public _selectedIds:number[]=[];  //les identifiants des objets selectionner
     public _search:string=""          //la valeur de la bare de recherche;
     //Message afficher sur le dialog de confirmations lors de la suppression
-    public _deleteMessage:string = "Etes vous sur de vouloir supprimer cet entiter ?";
-    public _isAddFormOpen=false         //Flag qui detecte si le formulaire de création est ouvert
-    public _dialItems:MenuItem[]=[];    //Menu su le bouton + de la vue
-    public _curentPage:number=NaN;      //Page Courente si on a un systéme de pagination
-    public _attributes:Attributes[]=[]; //La liste des attribute pour filter
-    public _selectedAttribute:Attributes|null=null //L'attribue selection actuellement
-    public _defaultAttribute:Attributes|null=null //l'attribue par defaut si le component ne  permet pas un filtrage sur plusieurs attribut (cas general)
-    
+    public _deleteMessage:string   = "Etes vous sur de vouloir supprimer cet entiter ?";
+    public _isAddFormOpen:boolean  = false         //Flag qui detecte si le formulaire de création est ouvert
+    public _dialItems:MenuItem[]   = [];    //Menu su le bouton + de la vue
+    public _curentPage:number      = NaN;      //Page Courente si on a un systéme de pagination
+    public _attributes:Attributes[]= []; //La liste des attribute pour filter
+    public _selectedAttribute:Attributes|null = null //L'attribue selection actuellement
+    public _defaultAttribute:Attributes|null  = null //l'attribue par defaut si le component ne  permet pas un filtrage sur plusieurs attribut (cas general)
+    public _parentId:number = NaN;
+
     /**
      * Etat local d'un component
      * @note wrapper dans un objet pour povoir effectuer un passage par reference
@@ -81,6 +82,10 @@ export abstract class AbstractAPIComponent<T,S> implements ComponentOperationsIn
         if(!isNaN(this._curentPage)){
             request.page = this._curentPage;
         }
+        if(!isNaN(this._parentId)){
+            request.parentId = this._parentId;
+        }
+
         //On verifie si on a des attributs
         if(this._attributes.length > 0){
             request.search ={attribute:this._selectedAttribute?.nom,}

@@ -1,59 +1,40 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MessageService } from 'primeng/api';
-import { Observable, tap } from 'rxjs';
-import { EntityContainer, PaginatedData } from 'src/app/models/entityContainer.model';
+import { map } from 'rxjs';
 import { RegionAttributes } from 'src/app/models/localisation.model';
-import { DataMessage, MessageModel } from 'src/app/models/message.model';
-import { RegionRequest } from 'src/app/models/requests/localisationRequest.model';
+import { AbstractAPIService } from 'src/app/share/class/abstractAPI.service';
+import { IndexRequest } from 'src/app/share/interfaces/CrudInterface';
 import { myEnv } from 'src/environments/myEnv';
-import { RestInterface } from '../restInterface.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class RegionService implements RestInterface {
+export class RegionService extends AbstractAPIService<RegionAttributes,RegionAttributes> {
+  public override baseURL: string = myEnv.urls.region;
+  public override parentURL: string | null = myEnv.urls.parent;
+  public override slug:string = 'regions';
+  public parentId:number=NaN;
 
-  private  _data:PaginatedData<EntityContainer<RegionAttributes>>|null=null;
-  constructor(private http:HttpClient,private messageService:MessageService) { }
+  constructor(
+    protected override http:HttpClient,
+    protected override messageService:MessageService) {
+    super(http,messageService)
+  }
 
   get regions(){
     return this._data;
   }
 
-  public index(id:number):Observable<PaginatedData<EntityContainer<RegionAttributes>>>{
-    return this.http.get<PaginatedData<EntityContainer<RegionAttributes>>>(`${myEnv.urls.parent}/${id}/regions`)
-    .pipe(tap({
-      next:(reponse)=>{this._data = reponse}
-    }));
-  }
-
-  public store(payload:RegionRequest): Observable<DataMessage<EntityContainer<RegionAttributes>>> {
-    return this.http.post<DataMessage<EntityContainer<RegionAttributes>>>(myEnv.urls.region,payload)
-    .pipe(tap({
-      next:()=>{this.messageService.add({severity:'success',summary:'Region crée'})},
-      error:(error)=>{this.messageService.add({severity:'error',summary:'Erreur de creation',detail:'Impossible de crée cette region veuillez réessayer ultérieurement ou rechargez la page'})}
-    }));
-  }
-
-  public update(data:RegionRequest, id: number): Observable<DataMessage<EntityContainer<RegionAttributes>>> {
-    return this.http.put<DataMessage<EntityContainer<RegionAttributes>>>(myEnv.urls.region+'/'+id,data)
-    .pipe(tap({
-      next:()=>{this.messageService.add({severity:'success',summary:'Region crée'})},
-      error:(error)=>{this.messageService.add({severity:'error',summary:'Erreur de mis a jour',detail:'Impossible de crée cette region veuillez réessayer ultérieurement ou rechargez la page'})}
-    }));
-  }
-
-  public show(id: number): Observable<EntityContainer<RegionAttributes>> {
-    return this.http.get<EntityContainer<RegionAttributes>>(myEnv.urls.region+'/'+id);
-  }
-
-  public destroy(id: number): Observable<MessageModel> {
-    return this.http.delete<MessageModel>(myEnv.urls.region+'/'+id)
-    .pipe(tap({
-      next:()=>{this.messageService.add({severity:'success',summary:'Site Parent supprimer'})},
-      error:(error)=>{this.messageService.add({severity:'error',summary:'Erreur de suppression',detail:'Impossible de supprimer cette region veuillez réessayer ultérieurement ou rechargez la page'})}
-    }));
+  /**
+   * Methode qui entour le methode index de @AbstractAPIService pour permetre ajouter une fonctionalier de watcher sur le parent
+   * A tout moment @parentId conservera l'identifiant de son parent
+   */
+  public override index(request:IndexRequest){
+    return super.index(request).pipe(map((reponse)=>{
+      this.parentId = request.parentId as number;
+      return reponse;
+    }))
   }
 
   public purge(){

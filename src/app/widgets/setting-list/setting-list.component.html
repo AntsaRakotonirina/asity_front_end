@@ -1,0 +1,12 @@
+<div class="title">
+    <ng-content select="[title]"></ng-content>
+</div>
+<div class="list">
+    <ng-content select="[list]" *ngIf="!parentState.isLoading"></ng-content>
+</div>
+<div class="paginator">
+    <p-paginator *ngIf="!parentState.isSearching" [rows]="15" [totalRecords]="total" (onPageChange)="onPage($event)"></p-paginator>
+</div>
+<div class="controll">
+    <button class="p-button p-button-outlined" pButton label="Ajouter" (click)="onCreate()"></button>
+</div>

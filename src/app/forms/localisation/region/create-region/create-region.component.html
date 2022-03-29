@@ -1,1 +1,10 @@
-<p>create-region works!</p>
+<div class="form">
+    <div class="form-section">
+        <label for="name">Nom de la region</label>
+        <input type="text" pInputText id="name" [(ngModel)]="values.nom" placeholder="eg: Analamanga">
+    </div>
+    <div class="form-section form-controll">
+        <button pButton label="Annuler" class="p-button p-button-text" (click)="onReset()"></button>
+        <button pButton label="Ajouter" class="p-button p-button-outlined" (click)="onSubmit()" [disabled]="!formValid"></button>
+    </div>
+</div>
