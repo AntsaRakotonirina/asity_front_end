@@ -44,7 +44,7 @@ export class ScientifiqueComponent extends AbstractAPIComponent<ScientifiqueAttr
         icon: 'pi pi-upload',
         command:()=>{
           this.dialogService.open(UploadComponent,{
-            header:"Charger les scientifiques",
+            header:"Charger les scientifiques en csv",
             data:{url:myEnv.urls.scientifique+'/file'}
           })
         }

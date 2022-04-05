@@ -30,7 +30,14 @@
         </app-cards>
     </div>
 </div>
-
+<div cards class="placeholder" *ngIf="!_state.isLoading && scientifiques?.data?.length == 0">
+    <div>
+        Aucun scientifique n'est encore disponible :(
+    </div>
+    <div style="font-size: 10pt; margin-top: 5px;">
+        Essayez de modifier le filtre de recherche ou créez un nouveau scientifique
+    </div>
+</div>
 </app-global-list>
 
 <p-dialog [(visible)]="_isAddFormOpen" [draggable]="false" [modal]="true" header="ajouter un scientifique">

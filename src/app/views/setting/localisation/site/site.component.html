@@ -1,15 +1,3 @@
-<!-- <div class="title">
-    Sites
-</div>
-<div *ngIf="sites" class="list">
-    <div *ngFor="let site of sites.data" class="list-item">
-        {{site.attributes.nom}}
-    </div>
-</div>
-<div class="controll">
-    <button class="p-button p-button-outlined" pButton label="Ajouter"></button>
-</div> -->
-
 <app-setting-list
     (create)="_isAddFormOpen = true"
     [parentState]="_state"
@@ -20,15 +8,18 @@
         Sites
     </span>
     <div list>
-    <app-list-item 
-        *ngFor="let site of sites?.data" 
-        buttonLabel="Sites"
-        (delete)="onDelete(site.id)"
-        (update)="onUpdate(site)"
-        (info)="onInfo(site)"
-    >
-        <div content>{{site.attributes.nom}}</div>
-    </app-list-item>
+        <app-list-item 
+            *ngFor="let site of sites?.data" 
+            buttonLabel="Sites"
+            (delete)="onDelete(site.id)"
+            (update)="onUpdate(site)"
+            (info)="onInfo(site)"
+        >
+            <div content>{{site.attributes.nom}}</div>
+        </app-list-item>
+    </div>
+    <div list class="placeholder" *ngIf="!_state.isLoading && sites?.data?.length == 0">
+        Liste vide
     </div>
 </app-setting-list>
 <p-dialog [(visible)]="_isAddFormOpen" [modal]="true" header="Ajouter un site">

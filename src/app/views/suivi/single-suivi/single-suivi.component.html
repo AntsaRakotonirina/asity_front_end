@@ -9,11 +9,14 @@
                 </span>
                 <span class="col"></span>
                 <span class="col-fixed">
-                    <div class="p-inputgroup">
+                    <div class="p-inputgroup" *ngIf="authService.userIsAdmin">
                         <button pButton class="p-button-sm" class="p-button p-button-text" icon="pi pi-plus" (click)="onAdd()"></button>
                         <button pButton class="p-button-sm" class="p-button p-button-text" icon="pi pi-user" (click)="onParticipation()"></button>
                         <button pButton class="p-button-sm" class="p-button p-button-text" icon="pi pi-map-marker" (click)="onLocalisation()"></button>
                     </div>
+                </span>
+                <span class="col-fixed">
+                    <button pButton class="p-button-sm" class="p-button p-button-text" icon="pi pi-fw pi-info-circle" (click)="_infoOpen = true"></button>
                 </span>
             </div>
             
@@ -91,4 +94,24 @@ header="Ajouter une observation"
 [draggable]="false"
 (onHide)="_addFormOpen = false">
     <app-create-observation (close)="_addFormOpen = false" [default_date]="_suivi.data.attributes.default_date" [suivi_id]="id" *ngIf="_addFormOpen"></app-create-observation>
+</p-dialog>
+<p-dialog
+[(visible)]="_infoOpen"
+[header]="'Suivi du '+_suivi.data.attributes.default_date">
+    <div class="localisations">
+        <div>Localisations :</div>
+        <ul>
+            <li *ngFor="let localisation of _suivi.data.attributes.localisations">
+                {{localisation.attributes.site}}
+            </li>
+        </ul>
+    </div>
+    <div class="participations">
+        <div>Participations :</div>
+        <ul>
+            <li *ngFor="let participation of _suivi.data.attributes.participations">
+                {{participation.attributes.scientifique}}
+            </li>
+        </ul>
+    </div>
 </p-dialog>

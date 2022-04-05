@@ -18,3 +18,13 @@ body{
 *::-webkit-scrollbar-thumb {
   background-color: var(--green-100);
 }
+
+.placeholder{
+    opacity: .4;
+    height: 85%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}

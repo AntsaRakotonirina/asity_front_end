@@ -1,17 +1,19 @@
 <div class="dock">
-    <div class="brand">
-        Asity DB
+    <div>
+        <div class="brand">
+            Asity <span>DB</span>
+        </div>
+        <nav>
+            <a [routerLink]="[ '/app/animal' ]" routerLinkActive="active">Animal</a>
+            <a [routerLink]="[ '/app/suivi' ]" routerLinkActive="active">Suivi</a>
+            <a [routerLink]="[ '/app/scientifique' ]" routerLinkActive="active">Scientifique</a>
+            <a [routerLink]="[ '/app/settings' ]" routerLinkActive="active" *ngIf="authService.userIsAdmin">Paramettres</a>
+            <a [routerLink]="[ '/app/test' ]" routerLinkActive="active">Test</a>
+        </nav>
     </div>
-    <nav>
-        <a [routerLink]="[ '/app/animal' ]" routerLinkActive="active">Animal</a>
-        <a [routerLink]="[ '/app/suivi' ]" routerLinkActive="active">Suivi</a>
-        <a [routerLink]="[ '/app/scientifique' ]" routerLinkActive="active">Scientifique</a>
-        <a [routerLink]="[ '/app/settings' ]" routerLinkActive="active" *ngIf="authService.userIsAdmin">Paramettres</a>
-        <a [routerLink]="[ '/app/test' ]" routerLinkActive="active">Test</a>
-    </nav>
-    <button class=" p-button-outlined" pButton icon="pi pi-sign-out" label="Se deconnecter" (click)="onLogout()"></button>
+    
+    <button class=" p-button p-button-rounded p-button-outlined" pButton icon="pi pi-sign-out" label="Se deconnecter" (click)="onLogout()"></button>
 </div>
-<p-divider layout="vertical"></p-divider>
 <div class="content">
     <router-outlet></router-outlet>
 </div>

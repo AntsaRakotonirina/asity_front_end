@@ -8,17 +8,20 @@
         Sites Parents
     </span>
     <div list>
-    <app-list-item 
-        *ngFor="let parent of parents?.data" 
-        buttonLabel="Region" 
-        (select)="onSelect(parent.id)"
-        (delete)="onDelete(parent.id)"
-        (update)="onUpdate(parent)"
-        (info)="onInfo(parent)"
-        [active]="parent.id === parentId"
-    >
-        <div content>{{parent.attributes.aireProteger}}</div>
-    </app-list-item>
+        <app-list-item 
+            *ngFor="let parent of parents?.data" 
+            buttonLabel="Region" 
+            (select)="onSelect(parent.id)"
+            (delete)="onDelete(parent.id)"
+            (update)="onUpdate(parent)"
+            (info)="onInfo(parent)"
+            [active]="parent.id === parentId"
+        >
+            <div content>{{parent.attributes.aireProteger}}</div>
+        </app-list-item>
+    </div>
+    <div list class="placeholder" *ngIf="!_state.isLoading && parents?.data?.length == 0">
+        Liste vide
     </div>
 </app-setting-list>
 <p-dialog [(visible)]="_isAddFormOpen" [modal]="true" header="Ajouter un site parent">

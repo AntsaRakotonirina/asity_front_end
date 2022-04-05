@@ -40,6 +40,15 @@
     </div>
 </div>
 
+<div cards class="placeholder" *ngIf="!_state.isLoading && animals?.data?.length ==0">
+    <div>
+        Aucun animal n'est encore disponible :(
+    </div>
+    <div style="font-size: 10pt; margin-top: 5px;">
+        Essayez de modifier le filtre de recherche ou ajouter un animal
+    </div>
+</div>
+
 </app-global-list>
 
 <p-dialog [(visible)]="_isAddFormOpen" [modal]="true" header="ajouter un animal" [draggable]="false">

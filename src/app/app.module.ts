@@ -57,7 +57,6 @@ import { CalendarModule } from "primeng/calendar";
 import { ContextMenuModule } from "primeng/contextmenu";
 import { ConfirmDialogModule } from "primeng/confirmdialog";
 import { ConfirmationService, MessageService } from "primeng/api";
-import { DividerModule } from "primeng/divider";
 import { DropdownModule } from "primeng/dropdown";
 import { DialogModule } from "primeng/dialog";
 import { DialogService, DynamicDialogConfig, DynamicDialogModule, DynamicDialogRef } from "primeng/dynamicdialog";
@@ -108,7 +107,6 @@ const  primesModules = [
   PasswordModule,
   ButtonModule,
   CheckboxModule,
-  DividerModule,
   ConfirmDialogModule,
   DropdownModule,
   CardModule,

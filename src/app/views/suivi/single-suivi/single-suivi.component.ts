@@ -8,6 +8,7 @@ import { ObservationAttributes } from 'src/app/models/observation.model';
 import { ObservationRequest } from 'src/app/models/requests/observationRequest.model';
 import { SuiviRequest } from 'src/app/models/requests/suiviRequest.model.model';
 import { SuiviSingleAttributes } from 'src/app/models/suivi.model';
+import { AuthService } from 'src/app/services/auth.service';
 import { NoteService } from 'src/app/services/note.service';
 import { ObservationService } from 'src/app/services/observation.service';
 import { SuiviService } from 'src/app/services/suivi.service';
@@ -26,8 +27,10 @@ export class SingleSuiviComponent implements OnInit {
   id:number = NaN;
   _selectedObsIds:number[]=[];
   _addFormOpen:boolean=false;
+  _infoOpen:boolean=false;
   
   constructor(
+    public authService:AuthService,
     private suiviService:SuiviService,
     private observationService:ObservationService,
     private route:ActivatedRoute,

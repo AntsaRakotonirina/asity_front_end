@@ -65,7 +65,11 @@ export abstract class AbstractAPIService<T,S> implements CrudInterface{
     store(request: StoreRequest): Observable<DataMessage<EntityContainer<T>>> {
         return this.http.post<DataMessage<EntityContainer<T>>>(this.baseURL,request.data)
         .pipe(
-            tap(this.responseHandler('create'))
+            tap(this.responseHandler('create')),
+            map((reponse)=>{
+                this._data?.data.push(reponse.data)
+                return reponse;
+            })
         )
     }
 

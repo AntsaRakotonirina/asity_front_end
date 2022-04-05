@@ -20,6 +20,9 @@
             <div content>{{region.attributes.nom}}</div>
         </app-list-item>
     </div>
+    <div list class="placeholder" *ngIf="!_state.isLoading && regions?.data?.length == 0">
+        Liste vide
+    </div>
 </app-setting-list>
 <p-dialog [(visible)]="_isAddFormOpen" [modal]="true" header="Ajouter une region">
     <app-create-region (close)="_isAddFormOpen = false"></app-create-region>

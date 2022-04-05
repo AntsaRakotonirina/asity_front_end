@@ -5,10 +5,27 @@
     (pageChange)="onPage($event)"
 >
 <div style="margin-top: .5rem;" searchBar>
-    <label>Depuis: </label>
-    <p-calendar [(ngModel)]="_filterDates.from" (onSelect)="onSearch()" inputId="from"></p-calendar>
-    <label style="margin-left: 1rem;">Jusqu'a: </label>
-    <p-calendar [(ngModel)]="_filterDates.to" (onSelect)="onSearch()" inputId="to"></p-calendar>
+    <div class="grid">
+        <div class="col-fixed">
+            <label>Depuis: </label>
+            <p-calendar 
+                [(ngModel)]="_filterDates.from" 
+                (onSelect)="onSearch()" 
+                inputId="from"
+                [inputStyle]="{border:'none',color:'var(--green-500)',width:'100px'}"
+            ></p-calendar>
+        </div>
+        <div class="col"></div>
+        <div class="col-fixed">
+            <label >Jusqu'a: </label>
+            <p-calendar 
+                [(ngModel)]="_filterDates.to" 
+                (onSelect)="onSearch()" 
+                inputId="to"
+                [inputStyle]="{border:'none',color:'var(--green-500)',width:'100px'}"
+            ></p-calendar>
+        </div>
+    </div>
 </div>
 
 <div cards class="grid" style="padding: 1rem;" *ngIf="suivis">
@@ -30,7 +47,14 @@
         </app-cards>
     </div>
 </div>
-
+<div cards class="placeholder" *ngIf="!_state.isLoading && suivis?.data?.length == 0">
+    <div>
+        Aucune suivi n'est encore disponible :(
+    </div>
+    <div style="font-size: 10pt; margin-top: 5px;">
+        Essayez de modifier le filtre de recherche ou créez une nouvelle suivi
+    </div>
+</div>
 </app-global-list>
 
 <p-dialog [(visible)]="_isAddFormOpen" [draggable]="false" [modal]="true" header="Ajouter une suivi">
