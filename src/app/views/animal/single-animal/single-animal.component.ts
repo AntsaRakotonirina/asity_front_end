@@ -31,7 +31,7 @@ export class SingleAnimalComponent implements OnInit {
   };
   _initialUpdateRequest!:animalUpdateRequest; //Copie des attribue d'un animal utilie notament pour les diff
   _newNoteTitle:string="";
-  _newNoteValue:string=""
+  _newNoteValue:string="";
 
   suggestions:string[]=[];
 

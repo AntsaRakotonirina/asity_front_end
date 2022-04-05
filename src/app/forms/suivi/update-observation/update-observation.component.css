@@ -1,0 +1,28 @@
+:host{
+    display: block;
+    height: fit-content;
+    width: fit-content;
+}
+.form-section{
+    margin: 1rem 0;
+}
+.form-row{
+    display: flex;
+}
+label{
+    display: block;
+    margin-bottom: .5rem;
+    font-size: 10pt;
+    color: var(--green-600);
+}
+.form-controll{
+    display: flex;
+    justify-content: flex-end;
+}
+button{
+    text-align: center;
+    margin: .5rem 0;
+}
+input{
+    width: 100%;
+}

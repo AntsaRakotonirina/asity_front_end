@@ -9,9 +9,9 @@ export interface ObservationAttributes{
     abondance:number,
     presence:boolean,
     zone:string,
-    notes:EntityContainer<NoteAttributes>[],
+    notes:{data:EntityContainer<NoteAttributes>[]},
     animal_id:number,
     suivi_id:number,
-    site_parent_id:number,
     nombre:number,
+    date:Date,
 }

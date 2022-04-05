@@ -5,7 +5,7 @@ export interface ObservationRequest{
     nombre:number,
     presence:boolean,
     abondance:number,
-    site_id:number,
+    animal_id:number,
     suivi_id:number,
     zone:string,
     date:Date,

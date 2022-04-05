@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/api';
+import { EntityContainer } from 'src/app/models/entityContainer.model';
 import { SuiviAttributes, SuiviSingleAttributes } from 'src/app/models/suivi.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { DateIndexRequest, SuiviService } from 'src/app/services/suivi.service';
@@ -13,7 +15,7 @@ import { AbstractAPIComponent } from 'src/app/share/class/abstract.component';
 export class SuiviComponent extends AbstractAPIComponent<SuiviAttributes,SuiviSingleAttributes> implements OnInit{
 
   _filterDates:{from:Date,to:Date}={
-    from: new Date('2000-1-1'),
+    from: new Date('1970-1-1'),
     to: new Date()
   }
 
@@ -21,6 +23,7 @@ export class SuiviComponent extends AbstractAPIComponent<SuiviAttributes,SuiviSi
     protected suiviService:SuiviService,
     protected override confirmationService:ConfirmationService,
     public override authService:AuthService,
+    private router:Router
   ) {
     super(suiviService,confirmationService,authService);
   }
@@ -51,5 +54,7 @@ export class SuiviComponent extends AbstractAPIComponent<SuiviAttributes,SuiviSi
     return request;
   }
 
-  onInfo(suivi:any){}
+  onInfo(suivi:EntityContainer<SuiviAttributes>){
+    this.router.navigate([`/app/suivi/${suivi.id}`]);
+  }
 }

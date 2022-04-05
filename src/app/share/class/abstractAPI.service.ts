@@ -98,7 +98,7 @@ export abstract class AbstractAPIService<T,S> implements CrudInterface{
             tap(this.responseHandler('delete')),
             map((reponse)=>{
                 const index = this._data?.data.findIndex((value)=>value.id === id)
-                if(index && index >= 0 && this._data){
+                if(index !== undefined && index >= 0 && this._data !== null){
                     this._data.data.splice(index,1);
                 }
                 return reponse;

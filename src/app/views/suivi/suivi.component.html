@@ -16,6 +16,7 @@
         <app-cards [id]="suivi.id"
         [isDeletable]="authService.userIsAdmin || false" 
         (delete)="onDelete(suivi.id)"
+        (info)="onInfo(suivi)"
         >
             <div header *ngIf="authService.userIsAdmin">
                 <p-checkbox name="selected" [value]="suivi.id" [(ngModel)]="_selectedIds"></p-checkbox>

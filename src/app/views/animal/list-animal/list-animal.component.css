@@ -1,0 +1,14 @@
+.item{
+    margin: .5em 1em;
+    color: var(--gray-500);
+    cursor: pointer;
+}
+
+.item:hover{
+    color: var(--teal-500);
+}
+
+.list{
+    padding: 1em 0;
+    min-height: 430px;
+}

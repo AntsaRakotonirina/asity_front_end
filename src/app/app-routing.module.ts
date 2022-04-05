@@ -14,6 +14,7 @@ import { HomeComponent } from './views/setting/localisation/home/home.component'
 import { LocalisationComponent } from './views/setting/localisation/localisation.component';
 import { SettingComponent } from './views/setting/setting.component';
 import { UserComponent } from './views/setting/user/user.component';
+import { SingleSuiviComponent } from './views/suivi/single-suivi/single-suivi.component';
 import { SuiviComponent } from './views/suivi/suivi.component';
 
 const settingRoutes:Routes = [
@@ -31,6 +32,7 @@ const appRoutes: Routes = [
   {path:'animal/:id',component:SingleAnimalComponent,canDeactivate:[AnimalUpdateGuard]},
   {path:'scientifique',component:ScientifiqueComponent},
   {path:'suivi',component:SuiviComponent},
+  {path:'suivi/:id',component:SingleSuiviComponent},
   {path:'settings',component:SettingComponent,canActivate:[AdminGuard],children:settingRoutes},
   {path:'test',component:TestFormComponent}
 ];

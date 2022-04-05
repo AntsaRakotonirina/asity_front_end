@@ -1,0 +1,45 @@
+
+<div class="grid container" *ngIf="_sites">
+    <div class="col">
+        <div class="head">
+            <i class="pi pi-search" searchIcon></i>
+            <form (submit)="onSearch()">
+                <input type="text" placeholder="Recherche..." [(ngModel)]="searchValue" [ngModelOptions]="{standalone: true}" required>
+            </form>
+        </div>
+        <div class="list">
+            <div class="card" *ngFor="let site of sites" >
+                <div>
+                    {{site.attributes.nom}}
+                </div>
+                <button (click)="onAdd(site.id)"
+                pButton
+                class="p-button p-button-text p-button-rounded"
+                icon="pi pi-angle-right"
+                >
+                </button>
+            </div>
+        </div>
+        <div class="page">
+            <p-paginator [rows]="15" [totalRecords]="_sites.meta.total" (onPageChange)="onPage($event)" *ngIf="!isSearching"></p-paginator>
+        </div>
+        
+    </div>
+    <div class="col-fixed"
+    >
+        <div class="drop" *ngIf="localisations">
+            <div class="card" *ngFor="let local of localisations">
+                <div>
+                    {{local.attributes.site}}
+                </div>
+                
+                 <button (click)="onDelete(local.id)" 
+                 pButton
+                 class="p-button p-button-text p-button-rounded p-button-danger"
+                 icon="pi pi-trash"
+                 >
+                 </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,4 @@
+<button pButton [label]="name" (click)="search.toggle($event)" style="min-width:150px ;" class="p-button p-button-outlined"></button>
+<p-overlayPanel #search>
+    <app-list-animal (select)="onSelect($event);search.hide()"></app-list-animal>
+</p-overlayPanel>

@@ -1,0 +1,15 @@
+<div class="container" *ngIf="_animal">
+    <div class="search-bar">
+        <form (submit)="onSearch()">
+            <span class="p-input-icon-right">
+                <i class="pi pi-search" searchIcon></i>
+                <input type="text" placeholder="Rechercher" pInputText [(ngModel)]="searchValue" [ngModelOptions]="{standalone: true}">
+            </span>
+        </form>
+    </div>
+    <div class="list">
+        <div *ngFor="let animal of _animal.data" class="item" (click)="onSelect(animal)">
+            {{animal.attributes.nom_courrant}}
+        </div>
+    </div>
+</div>

@@ -28,6 +28,24 @@ import { CreateUserComponent } from './forms/user/create-user/create-user.compon
 import { SingleAnimalComponent } from './views/animal/single-animal/single-animal.component';
 import { HomeComponent } from './views/setting/localisation/home/home.component';
 import { CreateSuiviComponent } from './forms/suivi/create-suivi/create-suivi.component';
+import { ScatterChartComponent } from './widgets/scatter-chart/scatter-chart.component';
+import { CreateVerNameComponent } from './forms/animal/create-ver-name/create-ver-name.component';
+import { CreateComNameComponent } from './forms/animal/create-com-name/create-com-name.component';
+import { CreateSciNameComponent } from './forms/animal/create-sci-name/create-sci-name.component';
+import { CreateParentComponent } from './forms/localisation/parent/create-parent/create-parent.component';
+import { UpdateParentComponent } from './forms/localisation/parent/update-parent/update-parent.component';
+import { CreateRegionComponent } from './forms/localisation/region/create-region/create-region.component';
+import { UpdateRegionComponent } from './forms/localisation/region/update-region/update-region.component';
+import { CreateSiteComponent } from './forms/localisation/site/create-site/create-site.component';
+import { UpdateSiteComponent } from './forms/localisation/site/update-site/update-site.component';
+import { ParentInfoComponent } from './views/setting/localisation/parent/parent-info/parent-info.component';
+import { ListItemComponent } from './widgets/list-item/list-item.component';
+import { GlobalListComponent } from './views/global-list/global-list.component';
+import { SettingListComponent } from './widgets/setting-list/setting-list.component';
+import { SiteInfoComponent } from './views/setting/localisation/site/site-info/site-info.component';
+import { SingleSuiviComponent } from './views/suivi/single-suivi/single-suivi.component';
+import { ParticipationComponent } from './views/suivi/single-suivi/participation/participation.component';
+import { LocalComponent } from './views/suivi/single-suivi/local/local.component';
 
 import { AutoCompleteModule } from "primeng/autocomplete";
 import { AccordionModule } from "primeng/accordion";
@@ -48,6 +66,7 @@ import { InputTextModule } from "primeng/inputtext";
 import { InputSwitchModule } from "primeng/inputswitch";
 import { InputNumberModule } from "primeng/inputnumber";
 import { MenuModule } from "primeng/menu";
+import { OverlayPanelModule } from "primeng/overlaypanel";
 import { PasswordModule } from "primeng/password";
 import { PaginatorModule } from "primeng/paginator";
 import { RadioButtonModule } from "primeng/radiobutton";
@@ -59,24 +78,16 @@ import { SelectButtonModule } from "primeng/selectbutton";
 import { ScrollPanelModule } from "primeng/scrollpanel";
 import { SkeletonModule } from "primeng/skeleton";
 import { ToastModule } from "primeng/toast";
+import { ToggleButtonModule } from "primeng/togglebutton";
 import { TabMenuModule } from "primeng/tabmenu";
 import { TableModule } from "primeng/table";
 import { NgChartsModule } from 'ng2-charts';
-import { ScatterChartComponent } from './widgets/scatter-chart/scatter-chart.component';
-import { CreateVerNameComponent } from './forms/animal/create-ver-name/create-ver-name.component';
-import { CreateComNameComponent } from './forms/animal/create-com-name/create-com-name.component';
-import { CreateSciNameComponent } from './forms/animal/create-sci-name/create-sci-name.component';
-import { CreateParentComponent } from './forms/localisation/parent/create-parent/create-parent.component';
-import { UpdateParentComponent } from './forms/localisation/parent/update-parent/update-parent.component';
-import { CreateRegionComponent } from './forms/localisation/region/create-region/create-region.component';
-import { UpdateRegionComponent } from './forms/localisation/region/update-region/update-region.component';
-import { CreateSiteComponent } from './forms/localisation/site/create-site/create-site.component';
-import { UpdateSiteComponent } from './forms/localisation/site/update-site/update-site.component';
-import { ParentInfoComponent } from './views/setting/localisation/parent/parent-info/parent-info.component';
-import { ListItemComponent } from './widgets/list-item/list-item.component';
-import { GlobalListComponent } from './views/global-list/global-list.component';
-import { SettingListComponent } from './widgets/setting-list/setting-list.component';
-import { SiteInfoComponent } from './views/setting/localisation/site/site-info/site-info.component';
+import { ListAnimalComponent } from './views/animal/list-animal/list-animal.component';
+import { AnimalSelectionComponent } from './widgets/animal-selection/animal-selection.component';
+import { CreateObservationComponent } from './forms/suivi/create-observation/create-observation.component';
+import { UpdateObservationComponent } from './forms/suivi/update-observation/update-observation.component';
+
+
 
 
 
@@ -123,7 +134,9 @@ const  primesModules = [
   AccordionModule,
   RadioButtonModule,
   SplitButtonModule,
-  InputNumberModule
+  InputNumberModule,
+  OverlayPanelModule,
+  ToggleButtonModule
 ]
 
 @NgModule({
@@ -164,7 +177,14 @@ const  primesModules = [
     ListItemComponent,
     GlobalListComponent,
     SettingListComponent,
-    SiteInfoComponent
+    SiteInfoComponent,
+    SingleSuiviComponent,
+    ParticipationComponent,
+    LocalComponent,
+    ListAnimalComponent,
+    AnimalSelectionComponent,
+    CreateObservationComponent,
+    UpdateObservationComponent
   ],
   imports: [
     ...commonModules,

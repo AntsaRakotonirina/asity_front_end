@@ -1,0 +1,89 @@
+<div class="form">
+    
+    
+</div>
+
+<div class="page1" *ngIf="!_isNext">
+    <div class="form">
+        <div class="form-section">
+            <label>Animal concerner</label>
+            <app-animal-selection [(id)]="values.animal_id" [name]="this.name"></app-animal-selection>
+        </div>
+        <div class="form-section">
+            <label>Son habitat</label>
+            <input type="text" pInputText style="width: 100%;" placeholder="Habitat" [(ngModel)]="values.habitat"> 
+        </div>
+        <div class="form-section">
+            <label>Leurs nombre</label>
+            <p-inputNumber 
+                    [(ngModel)]="values.nombre"
+                    [showButtons]="true"
+                    [inputStyle]="{width:'100%'}"
+            ></p-inputNumber>
+        </div>
+        <div class="form-section">
+            <label>Leurs abondance</label>
+            <p-inputNumber 
+                    [(ngModel)]="values.abondance"
+                    [minFractionDigits]="2" 
+                    [maxFractionDigits]="20"
+                    suffix="%"
+                    [showButtons]="true"
+                    [inputStyle]="{width:'100%'}"
+            ></p-inputNumber>
+        </div>
+        <div class="form-section">
+            <label>Leurs presence</label>
+            <p-toggleButton 
+                    [(ngModel)]="values.presence" 
+                    onLabel="Present" 
+                    offLabel="Absent"
+            ></p-toggleButton>
+        </div>
+        
+        <div class="form-controll">
+            <button pButton class="p-button p-button-text" label="Annuler" (click)="onReset()"></button>
+            <button pButton class="p-button p-button-outlined" label="Suivant" (click)="_isNext = true"></button> 
+        </div>
+    </div>
+</div>
+<div class="page2" *ngIf="_isNext">
+    <div class="form">
+        <div class="form-section">
+            <label>La date d'observation</label>
+            <input type="date" [(ngModel)]="values.date" pInputText>
+        </div>
+        <div class="form-section">
+            <label> Zone d'observation</label>
+            <input type="text" pInputText style="width: 100%;" placeholder="Zone" [(ngModel)]="values.zone">
+        </div>
+        <div class="form-section">
+            <label>Latitude</label>
+            <p-inputNumber 
+                    [(ngModel)]="values.latitude" 
+                    [minFractionDigits]="2" 
+                    [maxFractionDigits]="20"
+                    [min]="-90" 
+                    [max]="90"
+                    [showButtons]="true"
+                    [inputStyle]="{width:'100%'}"
+            ></p-inputNumber>
+        </div>
+        <div class="form-section">
+            <label>Longitude</label>
+            <p-inputNumber 
+                    [(ngModel)]="values.longitude" 
+                    [minFractionDigits]="2" 
+                    [maxFractionDigits]="20"
+                    [min]="-90" 
+                    [max]="90"
+                    [showButtons]="true"
+                    [inputStyle]="{width:'100%'}"
+            ></p-inputNumber>
+        </div>
+        <div class="form-controll">
+            <button pButton class="p-button p-button-text" label="Percedent" (click)="_isNext = false"></button>
+            <button pButton class="p-button p-button-outlined" label="Ajouter" (click)="onSubmit()" ></button> 
+        </div>
+    </div>
+</div>

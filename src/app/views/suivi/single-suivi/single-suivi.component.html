@@ -1,0 +1,94 @@
+<div *ngIf="_suivi" class="container" >
+    <p-table [value]="attributes.observations" [scrollable]="true" scrollHeight="85vh" scrollDirection="both">
+        <ng-template pTemplate="caption">
+            <div class="grid">
+                <span class="col-fixed">
+                    <div class="title">
+                        Suivi du {{_suivi.data.attributes.default_date | date :'dd MMM y'}}
+                     </div>
+                </span>
+                <span class="col"></span>
+                <span class="col-fixed">
+                    <div class="p-inputgroup">
+                        <button pButton class="p-button-sm" class="p-button p-button-text" icon="pi pi-plus" (click)="onAdd()"></button>
+                        <button pButton class="p-button-sm" class="p-button p-button-text" icon="pi pi-user" (click)="onParticipation()"></button>
+                        <button pButton class="p-button-sm" class="p-button p-button-text" icon="pi pi-map-marker" (click)="onLocalisation()"></button>
+                    </div>
+                </span>
+            </div>
+            
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width:50px" pFrozenColumn>
+                    <button pButton class="p-button p-button-text" icon="pi pi-trash" (click)="onMassDelete()" [disabled]="_selectedObsIds.length < 1"></button>
+                </th>
+                <th style="width:200px" pFrozenColumn>Animal</th>
+                <th style="width:200px">Habitat</th>
+                <th style="width:200px">Nombre</th>
+                <th style="width:200px">Abondance</th>
+                <th style="width:200px">Presence</th>
+                <th style="width:200px">Date</th>
+                <th style="width:200px">Latitude</th>
+                <th style="width:200px">Longitude</th>
+                <th style="width:200px">Zone</th>
+                <th style="width:200px"></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-observation>
+            <tr>
+                <td style="width:50px" pFrozenColumn>
+                    <p-checkbox name="selected" [value]="observation.id" [(ngModel)]="_selectedObsIds"></p-checkbox>
+                </td>
+                <td style="width:200px" pFrozenColumn>
+                    <a [routerLink]="'/app/animal/'+observation.attributes.animal_id">{{observation.attributes.animal}}</a>
+                </td>
+                <td style="width:200px">
+                    {{observation.attributes.habitat}}
+                </td>
+                <td style="width:200px">
+                    {{observation.attributes.nombre}}
+                </td>
+                <td style="width:200px">
+                    {{observation.attributes.abondance}}
+                </td>
+                <td style="width:200px">
+                    {{observation.attributes.presence}}
+                </td>
+                <td style="width:200px">
+                    {{observation.attributes.date | date :'dd MMM y'}}
+                </td>
+                <td style="width:200px">
+                    {{observation.attributes.latitude}}
+                </td>
+                <td style="width:200px">
+                    {{observation.attributes.longitude}}
+                </td>
+                <td style="width:200px"> 
+                    {{observation.attributes.zone}}
+                </td>
+                <td style="width:200px">
+                    <button 
+                        pButton 
+                        class="p-button p-button-text p-button-rounded p-button-secondary" 
+                        style="margin-right: 5px;"
+                        (click)="onUpdate(observation)"
+                        icon="pi pi-pencil">
+                    </button>
+                    <button pButton class="p-button p-button-text p-button-rounded p-button-danger"
+                        icon="pi pi-trash"
+                        (click)="onDelete(observation.id)">
+                    </button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+<p-dialog 
+[(visible)]="_addFormOpen" 
+header="Ajouter une observation" 
+[modal]="true" 
+[draggable]="false"
+(onHide)="_addFormOpen = false">
+    <app-create-observation (close)="_addFormOpen = false" [default_date]="_suivi.data.attributes.default_date" [suivi_id]="id" *ngIf="_addFormOpen"></app-create-observation>
+</p-dialog>
